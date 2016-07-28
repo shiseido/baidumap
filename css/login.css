@@ -1,0 +1,20 @@
+.tb1{
+    margin-top:85%;
+}
+
+.inp1 td{
+
+    border: 1px solid black;
+}
+.inp1{
+    height: 2.5rem;
+    margin-top: 10%;
+}
+p{
+    color: gray;
+    font-weight: 300;
+    font-size: 1.2rem;
+    margin-top: 35%;
+    text-align: center;
+}
+
