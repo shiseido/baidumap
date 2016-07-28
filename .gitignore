@@ -2,3 +2,4 @@ www.jq22.com.txt
 .idea\*.*
 .idea
 *.url
+/js/jquery.mobile-1.4.5/demos/_assets/img/*.jpg

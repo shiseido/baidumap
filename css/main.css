@@ -1,9 +1,17 @@
 input{
     width: 100%;
-
 }
 table{
     position: absolute;
     bottom: 0;
     height: 20%;
+}
+.div1{
+    display: inline-block;
+    width: 23%;
+    height:100%;
+    background-color: orange
+}
+.div1:hover{
+    background-color: red;
 }
