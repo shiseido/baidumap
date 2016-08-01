@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=G8jh7j5mO1DS4WO4l4V86FNiVrZAORyG"></script>
+    <style type="text/css">
+        .ui-block-a p{
+            margin: 5%;
+        }
+        .checkhide{
+        display: none;
+        }
+        #pagetwo .ui-content{
+            margin-top: 20%;
+        }
+        .ui-icon-myicon:after {
+            background-image: url("image/electric.png");  /**你的图片，路径是相对于当前使用文件可以访问到的*/
+
+            background-size: 18px 18px;
+            border-radius: 0; /*图标形态，0=方形，不设置就是默认的圆形*/
+        }
+
+    </style>
+    <script type="text/javascript">
+        $(document).on("pagebeforecreate",function(){
+            if($("#left").height() > $("#right").height()){
+                $("#right").css("height",$("#left").height())
+            }else{
+                $("#left").css("height",$("#right").height())
+            }
+                });
+
+        $(document).on("pagebeforecreate",function(){
+            if($("#left1").height() > $("#right1").height()){
+                $("#right1").css("height",$("#left1").height())
+            }else{
+                $("#left1").css("height",$("#right1").height())
+            }
+        });
+        $(function(){
+            function show(){
+                var mydate = new Date();
+                var str = "" + mydate.getFullYear() +" ";
+                str += (mydate.getMonth()+1) + "/";
+                str += mydate.getDate() + "/";
+                str+=mydate.getHours()+":";
+                str+=mydate.getMinutes()+":";
+                str+=mydate.getSeconds();
+                return str;
+            }
+            $("#date").tap(function(){
+                $("#showdate").text(show());
+            });
+        });
+    </script>
+</head>
+<body>
+    <div data-role="page" id="pageone">
+        <div data-role="header">
+            <h1>凌翔中控
+                <a href="#" class="ui-btn ui-icon-comment ui-btn-right" >消息</a>
+            </h1>
+        </div>
+
+        <div data-role="main" class="ui-content">
+            <div class="ui-grid-solo" style="border:1px solid black;">
+                <img src="image/11.jpg" alt="" style="display: block;height: auto;width: 100%; "/>
+            </div>
+            <div class="ui-grid-a" >
+                <div class="ui-block-a" style="border:1px solid black;" id="left">
+                    <p style="color: white;background-color: black">车辆位置</p>
+                    <p>定位成功</p>
+                    <p>位置信息..</p>
+                    <a href="#" data-role="button" data-corners="false">刷新定位</a>
+                </div>
+                <div class="ui-block-b" style="border:1px solid black;" id="right">
+                    <a href="">
+                        <img src="image/11.jpg" alt="" style="display: block;height:auto;width: 100%;"/>
+                    </a>
+                </div>
+            </div>
+            <div class="ui-grid-solo" style="border:1px solid black;">
+                <p style="font-weight: bold"> 今日统计<span style="display: inline-block;float: right">行驶0KM,能耗0度</span></p>
+        </div>
+</div>
+        <div data-role="footer" data-position="fixed">
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="#" data-icon="home" class="ui-state-persist">首页</a></li>
+                    <li><a href="#pagetwo" data-icon="info">车况</a></li>
+                    <li><a href="#pagethree" data-icon="location">服务</a></li>
+                    <li><a href="#pagefour" data-icon="user">我</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+<div data-role="page" id="pagetwo">
+    <div data-role="header">
+        <h1>凌翔中控
+            <a href="#" class="ui-btn ui-icon-comment ui-btn-right" >消息</a>
+        </h1>
+    </div>
+    <div data-role="main" class="ui-content">
+        <div class="ui-grid-a" >
+            <div class="ui-block-a" style="border:1px solid black;" id="left1">
+                <img src="image/11.jpg" alt="" style="display: block;height:auto;width: 100%;"/>
+            </div>
+            <div class="ui-block-b" style="border:1px solid black;" id="right1" >
+                <p style="color: white;background-color: black">车况健康</p>
+                <p style="font-size: smaller" id="showdate">2016 05/01 12:00:00</p>
+                <a href="#" data-role="button" data-corners="false" id="date">刷新定位</a>
+            </div>
+        </div>
+        <div class="ui-grid-solo" style="border:1px solid black;">
+            <p class="checkhide">正在检测通讯系统</p>
+        </div>
+        <div class="ui-grid-c" style="border:1px solid black;">
+            <div class="ui-block-a"><img src="image/connect.jpg" alt="" style="margin-left: 50%"/></div>
+            <div class="ui-block-b"><img src="image/battery.jpg" alt="" style="margin-left: 50%"/></div>
+            <div class="ui-block-c"><img src="image/dashboard.jpg" alt="" style="margin-left: 50%"/></div>
+            <div class="ui-block-d"><img src="image/rocket.png" alt="" style="margin-left: 50%"/></div>
+        </div>
+        <div class="ui-grid-c" style="border:1px solid black;">
+            <div class="ui-block-a">通讯系统</div>
+            <div class="ui-block-b">供电系统</div>
+            <div class="ui-block-c">显示系统</div>
+            <div class="ui-block-d">动力系统</div>
+        </div>
+        <div class="ui-grid-c" style="border:1px solid black;">
+            <div class="ui-block-a"><img src="image/true.png" alt="" style="margin-left: 50%"/></div>
+            <div class="ui-block-b"><img src="image/true.png" alt="" style="margin-left: 50%"/></div>
+            <div class="ui-block-c"><img src="image/true.png" alt="" style="margin-left: 50%"/></div>
+            <div class="ui-block-d"><img src="image/true.png" alt="" style="margin-left: 50%"/></div>
+        </div>
+    </div>
+    <div data-role="footer" data-position="fixed" >
+        <div data-role="navbar">
+            <ul>
+                <li><a href="#pageone" data-icon="home">首页</a></li>
+                <li><a href="#" data-icon="info" class="ui-state-persist">车况</a></li>
+                <li><a href="#pagethree" data-icon="location">服务</a></li>
+                <li><a href="#pagefour" data-icon="user">我</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div data-role="page" id="pagethree">
+    <div data-role="header">
+        <h1>凌翔中控
+            <a href="#" class="ui-btn ui-icon-comment ui-btn-right" >消息</a>
+        </h1>
+    </div>
+    <div data-role="main" class="ui-content">
+        <div class="ui-grid-b" style="border:1px solid black;">
+            <div class="ui-block-a"><a href="#" data-role="button" data-icon="location" data-iconpos="top" style="background-color:green;"></a></div>
+            <div class="ui-block-b"><a href="#"  class="ui-btn ui-shadow  ui-btn-icon-top ui-icon-myicon"  data-transition="slide" style="background-color: greenyellow;"></a></div>
+            <div class="ui-block-c"><a href="#" data-role="button" data-icon="gear" data-iconpos="top" style="background-color: orange;"></a></div>
+        </div>
+        <div class="ui-grid-b" style="border:1px solid black;">
+            <div class="ui-block-a">历史轨迹</div>
+            <div class="ui-block-b">电子栅栏</div>
+            <div class="ui-block-c">设备配置</div>
+        </div>
+    </div>
+    <div data-role="footer" data-position="fixed">
+        <div data-role="navbar">
+            <ul>
+                <li><a href="#pageone" data-icon="home">更多</a></li>
+                <li><a href="#pagetwo" data-icon="info">车况</a></li>
+                <li><a href="#" data-icon="location" class="ui-state-persist">服务</a></li>
+                <li><a href="#pagefour" data-icon="user">我</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>
