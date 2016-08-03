@@ -1,37 +1,71 @@
 <!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-    <link rel="stylesheet" href="css/login.css"/>
-    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
-</head>
-<body>
-<div>
-    <div>
-        <table class="tb1">
-            <tr>
-                <td style="height:30%;width:25%;text-align: right" >
-                    <img src="image/user.png" alt=""/>
-                </td>
-                <td style="width: 45%;padding-right: 8%;"><input type="text" placeholder="用户名" style="line-height: 120%;font-size: 1.2em;width: 80%"/></td>
-            </tr>
-        </table>
-    </div>
-    <div>
-        <table>
-            <tr>
-                <td style="height: 30%;width: 25%;text-align: right" ><img src="image/lock.jpg" alt=""/></td>
-                <td style="width: 45%;padding-right: 8%;"><input type="password" placeholder="密码" style="line-height: 120%;font-size: 1.2em;width: 80%;"/></td>
-            </tr>
-        </table>
-    </div>
-    <div class="inp1">
-        <input type="submit" value="登录" style=" width: 49%;height: 90%"/>
-        <input type="button" value="注册" style=" width: 49%;height: 90%"/>
-    </div>
+<head>
+	<title>Login One</title>
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+	<link href="css/bootstrap-theme.min.css" rel="stylesheet" type="text/css">
+	<link href="css/templatemo_style.css" rel="stylesheet" type="text/css">
 
-</div>
-<p>体验账号</p>
+</head>
+<body class="templatemo-bg-gray">
+	<div class="container">
+		<div class="col-md-12">
+			<h1 class="margin-bottom-15">登录到凌博</h1>
+			<form class="form-horizontal templatemo-container templatemo-login-form-1 margin-bottom-30" role="form" action="#" method="post">				
+		        <div class="form-group">
+		          <div class="col-xs-12">		            
+		            <div class="control-wrapper">
+		            	<label for="username" class="control-label fa-label"><i class="fa fa-user fa-medium"></i></label>
+		            	<input type="text" class="form-control" id="username" placeholder="用户名">
+		            </div>
+		          </div>              
+		        </div>
+		        <div class="form-group">
+		          <div class="col-md-12">
+		          	<div class="control-wrapper">
+		            	<label for="password" class="control-label fa-label"><i class="fa fa-lock fa-medium"></i></label>
+		            	<input type="password" class="form-control" id="password" placeholder="密码">
+		            </div>
+		          </div>
+		        </div>
+		        <div class="form-group">
+		          <div class="col-md-12">
+	             	<div class="checkbox control-wrapper">
+	                	<label>
+	                  		<input type="checkbox"> 记住我
+                		</label>
+	              	</div>
+		          </div>
+		        </div>
+		        <div class="form-group">
+		          <div class="col-md-12">
+		          	<div class="control-wrapper">
+		          		<input type="submit" value="登录" class="btn btn-info">
+		          		<a href="forgot-password.html" class="text-right pull-right">忘记密码?</a>
+		          	</div>
+		          </div>
+		        </div>
+		        <hr>
+		        <div class="form-group">
+		        	<div class="col-md-12">
+		        		<label>快捷方式登录</label>
+		        		<div class="inline-block">
+		        			<a href="#"><i class="fa fa-weibo login-with"></i></a>
+			        		<a href="#"><i class="fa fa-qq login-with"></i></a>
+			        		<a href="#"><i class="fa fa-wechat login-with"></i></a>
+						</div>
+		        	</div>
+		        </div>
+		      </form>
+		      <div class="text-center">
+		      	<a href="create-account.html" class="templatemo-create-new">没有帐号？立即注册<i class="fa fa-arrow-circle-o-right"></i></a>
+		      </div>
+		</div>
+	</div>
 </body>
 </html>
