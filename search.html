@@ -7,18 +7,21 @@
     <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap-combined.min.css"/>
     <link rel="stylesheet" href="css/editor_gecko.css"/>
+    <link rel="stylesheet" href="css/editor.css"/>
     <script type="text/javascript" src="js/jquery-2.1.1/jquery.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/jquery.htmlClean.js"></script>
     <script type="text/javascript" src="js/jquery-ui.js"></script>
     <script type="text/javascript" src="js/scripts.js"></script>
-    <link rel="stylesheet" href="css/style.css" media="screen" type="text/css" />
+    <script type="text/javascript" src="js/ckeditor.js"></script>
+    <script type="text/javascript" src="js/config.js"></script>
+    <script type="text/javascript" src="js/jquery.ui.touch-punch.min.js"></script>
     <style type="text/css">
-       .normal{
-           text-decoration: none;
-           font-size: 1em;
-           color: #333333;
-       }
+        .normal{
+            text-decoration: none;
+            font-size: 1em;
+            color: #333333;
+        }
     </style>
 </head>
 <body>
@@ -107,90 +110,25 @@
                     </div>
                 </div>
                 <div class="span9">
-                    <div class="tabbable tabs-below" id="tabs-536111">
-                        <ul class="nav nav-tabs">
-                            <li class="active">
-                                <a href="#panel-398797" data-toggle="tab">第一部分</a>
-                            </li>
-                            <li>
-                                <a href="#panel-599362" data-toggle="tab">第二部分</a>
-                            </li>
-                        </ul>
-                        <div class="tab-content">
-                            <div class="tab-pane active" id="panel-398797">
-                                <p>
-                                <ul class="thumbnails">
-                                    <li class="span4">
-                                        <div class="thumbnail">
-                                            <img alt="300x200" src="image/fun1.png" />
-                                            <div class="caption">
-                                                <h3>
-                                                    待机模式
-                                                </h3>
-                                                <p>
-
-                                                </p>
-                                                <p>
-                                                    <a class="btn btn-primary" href="#">获取</a>                                    </p>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="span4">
-                                        <div class="thumbnail">
-                                            <img alt="300x200" src="image/fun2.png" />
-                                            <div class="caption">
-                                                <h3>
-                                                    电池信息
-                                                </h3>
-                                                <p>
-                                                    10%
-                                                </p>
-                                                <p>
-                                                    <a class="btn btn-primary" href="#">获取</a>
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="span4">
-                                        <div class="thumbnail">
-                                            <img alt="300x200" src="image/fun3.png" />
-                                            <div class="caption">
-                                                <h3>
-                                                    续航里程
-                                                </h3>
-                                                <p>
-                                                    25KM
-                                                </p>
-                                                <p>
-                                                    <a class="btn btn-primary" href="#">获取</a>                                    </p>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="tab-pane" id="panel-599362">
-                                <p>
-                                <div class="row-fluid">
-                                    <div class="span6">
-                                        <blockquote>
-                                            <p>
-                                               31.272194120，120.739822
-                                            </p>
-                                        </blockquote> <button class="btn btn-primary btn-large"  type="button">刷新定位</button>
-                                    </div>
-                                    <div class="span6">
-                                        <a href="baidumap.html" target="_blank"><img alt="140x140" src="image/resources_img_map.jpg" /></a>
-                                    </div>
-                                </div>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
+                    <form>
+                        <fieldset>
+                            <legend>历史轨迹</legend>
+                            <label>今天</label>
+                            <label><input type="text" /></label>
+                            <label><input type="text" /></label>
+                            <label>昨天</label>
+                            <label><input type="text" /></label>
+                            <label><input type="text" /></label>
+                            <label>自定义</label>
+                            <label><input type="text" /></label>
+                            <label><input type="text" /></label>
+                        </fieldset>
+                        <button type="submit" class="btn btn-large btn-primary">搜索</button>
+                    </form>
                 </div>
-            </div>
         </div>
     </div>
 </div>
+    </div>
 </body>
 </html>

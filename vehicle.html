@@ -16,6 +16,28 @@
     <script type="text/javascript" src="js/ckeditor.js"></script>
     <script type="text/javascript" src="js/config.js"></script>
     <script type="text/javascript" src="js/jquery.ui.touch-punch.min.js"></script>
+    <style type="text/css">
+        .check{
+            visibility: hidden;
+        }
+    </style>
+    <script type="text/javascript">
+        $(function(){
+            function show(){
+                var mydate = new Date();
+                var str = "" + mydate.getFullYear() + " ";
+                str += (mydate.getMonth()+1) + "/";
+                str += mydate.getDate() + "  ";
+                str +=mydate.getHours()+":";
+                str +=mydate.getMinutes()+":";
+                str +=mydate.getSeconds();
+                return str;
+            }
+            $("#refresh").click(function(){
+                $("#date").html(show());
+            });
+        });
+    </script>
 </head>
 <body>
 <div class="container-fluid">
@@ -66,11 +88,27 @@
                     <div class="accordion" id="accordion-773632">
                         <div class="accordion-group">
                             <div class="accordion-heading">
+                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-773632" href="">首页</a>
+                            </div>
+                        </div>
+                        <div class="accordion-group">
+                            <div class="accordion-heading">
+                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-773632" href="">车况</a>
+                            </div>
+                        </div>
+                        <div class="accordion-group">
+                            <div class="accordion-heading">
                                 <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-773632" href="#accordion-element-212338">服务</a>
                             </div>
                             <div id="accordion-element-212338" class="accordion-body collapse in">
                                 <div class="accordion-inner">
-                                    功能块...
+                                    历史轨迹
+                                </div>
+                                <div class="accordion-inner">
+                                    电子轨迹
+                                </div>
+                                <div class="accordion-inner">
+                                    设备配置
                                 </div>
                             </div>
                         </div>
@@ -80,7 +118,10 @@
                             </div>
                             <div id="accordion-element-42866" class="accordion-body collapse">
                                 <div class="accordion-inner">
-                                    功能块...
+                                    用户信息
+                                </div>
+                                <div class="accordion-inner">
+                                    关于
                                 </div>
                             </div>
                         </div>
@@ -98,9 +139,84 @@
                         </ul>
                         <div class="tab-content">
                             <div class="tab-pane" id="panel-715271">
-                                <p>
-                                    第一部分内容.
-                                </p>
+                                <p class="lead" id="date">11</p>
+                                <button class="btn btn-info btn-large" type="button" id="refresh">立即检测</button>
+                                <table class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th>
+                                            编号
+                                        </th>
+                                        <th>
+                                            系统
+                                        </th>
+                                        <th>
+                                            检测
+                                        </th>
+                                        <th>
+                                            状态
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr class="success">
+                                        <td>
+                                            1
+                                        </td>
+                                        <td>
+                                            <img src="image/resources_img_4mini.png" alt=""/>
+                                        </td>
+                                        <td >
+                                          <span class="check">正在检测通讯系统</span>
+                                        </td>
+                                        <td>
+                                            <img src="image/resources_img_ico3.png" alt=""/>
+                                        </td>
+                                    </tr>
+                                    <tr class="error">
+                                        <td>
+                                            2
+                                        </td>
+                                        <td>
+                                            <img src="image/resources_img_2mini.png" alt=""/>
+                                        </td>
+                                        <td>
+                                            <span class="check">正在检测供电系统</span>
+                                        </td>
+                                        <td>
+                                            <img src="image/resources_img_ico3.png" alt=""/>
+                                        </td>
+                                    </tr>
+                                    <tr class="warning">
+                                        <td>
+                                            3
+                                        </td>
+                                        <td>
+                                            <img src="image/resources_img_3mini.png" alt=""/>
+                                        </td>
+                                        <td>
+                                            <span class="check">正在检测显示系统</span>
+                                        </td>
+                                        <td>
+                                            <img src="image/resources_img_ico3.png" alt=""/>
+                                        </td>
+                                    </tr>
+                                    <tr class="info">
+                                        <td>
+                                            4
+                                        </td>
+                                        <td>
+                                            <img src="image/resources_img_1mini.png" alt=""/>
+                                        </td>
+                                        <td>
+                                            <span class="check">正在检测动力系统</span>
+                                        </td>
+                                        <td>
+                                            <img src="image/resources_img_ico3.png" alt=""/>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
                             </div>
                             <div class="tab-pane active" id="panel-665136">
                                 <p>
@@ -109,99 +225,7 @@
                             </div>
                         </div>
                     </div>
-                    <p class="lead">
-                        <strong>Linus Torvalds</strong>
-                    </p> <button class="btn btn-info btn-large" type="button">按钮</button>
-                    <table class="table table-striped">
-                        <thead>
-                        <tr>
-                            <th>
-                                编号
-                            </th>
-                            <th>
-                                产品
-                            </th>
-                            <th>
-                                交付时间
-                            </th>
-                            <th>
-                                状态
-                            </th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>
-                                1
-                            </td>
-                            <td>
-                                TB - Monthly
-                            </td>
-                            <td>
-                                01/04/2012
-                            </td>
-                            <td>
-                                Default
-                            </td>
-                        </tr>
-                        <tr class="success">
-                            <td>
-                                1
-                            </td>
-                            <td>
-                                TB - Monthly
-                            </td>
-                            <td>
-                                01/04/2012
-                            </td>
-                            <td>
-                                Approved
-                            </td>
-                        </tr>
-                        <tr class="error">
-                            <td>
-                                2
-                            </td>
-                            <td>
-                                TB - Monthly
-                            </td>
-                            <td>
-                                02/04/2012
-                            </td>
-                            <td>
-                                Declined
-                            </td>
-                        </tr>
-                        <tr class="warning">
-                            <td>
-                                3
-                            </td>
-                            <td>
-                                TB - Monthly
-                            </td>
-                            <td>
-                                03/04/2012
-                            </td>
-                            <td>
-                                Pending
-                            </td>
-                        </tr>
-                        <tr class="info">
-                            <td>
-                                4
-                            </td>
-                            <td>
-                                TB - Monthly
-                            </td>
-                            <td>
-                                04/04/2012
-                            </td>
-                            <td>
-                                Call in to confirm
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
+
                 </div>
             </div>
         </div>
