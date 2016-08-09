@@ -20,6 +20,17 @@
         .check{
             visibility: hidden;
         }
+        .normal1{
+            text-decoration: none;
+            font-size: 1em;
+            color: #333333;
+        }
+        .text-center{
+            color: #fafafa;
+            letter-spacing: 0;
+            text-shadow: 0 1px 0 #999, 0 2px 0 #888, 0 3px 0 #777,
+            0 4px 0 #666, 0 5px 0 #555, 0 6px 0 #444, 0 7px 0 #333, 0 8px 7px #001135
+        }
     </style>
     <script type="text/javascript">
         $(function(){
@@ -88,40 +99,50 @@
                     <div class="accordion" id="accordion-773632">
                         <div class="accordion-group">
                             <div class="accordion-heading">
-                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-773632" href="">首页</a>
+                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-773632" href="#accordion-element-212338">主页</a>
                             </div>
-                        </div>
-                        <div class="accordion-group">
-                            <div class="accordion-heading">
-                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-773632" href="">车况</a>
-                            </div>
-                        </div>
-                        <div class="accordion-group">
-                            <div class="accordion-heading">
-                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-773632" href="#accordion-element-212338">服务</a>
-                            </div>
-                            <div id="accordion-element-212338" class="accordion-body collapse in">
+                            <div id="accordion-element-212338" class="accordion-body collapse ">
                                 <div class="accordion-inner">
-                                    历史轨迹
-                                </div>
-                                <div class="accordion-inner">
-                                    电子轨迹
-                                </div>
-                                <div class="accordion-inner">
-                                    设备配置
+                                    <a href="newmain.html" class="normal1">主页</a>
                                 </div>
                             </div>
                         </div>
                         <div class="accordion-group">
                             <div class="accordion-heading">
-                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-773632" href="#accordion-element-42866">我</a>
+                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-773632" href="#accordion-element-42866">车况</a>
                             </div>
                             <div id="accordion-element-42866" class="accordion-body collapse">
                                 <div class="accordion-inner">
-                                    用户信息
+                                    <a href="vehicle.html" class="normal1">车况</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-group">
+                            <div class="accordion-heading">
+                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-773632" href="#accordion-element-42867">服务</a>
+                            </div>
+                            <div id="accordion-element-42867" class="accordion-body collapse">
+                                <div class="accordion-inner">
+                                    <a href="search.html" class="normal1">历史记录</a>
                                 </div>
                                 <div class="accordion-inner">
-                                    关于
+                                    <a href="" class="normal1">电子栅栏</a>
+                                </div>
+                                <div class="accordion-inner">
+                                    <a href="setting.html" class="normal1">设置配置</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-group">
+                            <div class="accordion-heading">
+                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-773632" href="#accordion-element-42868">我</a>
+                            </div>
+                            <div id="accordion-element-42868" class="accordion-body collapse">
+                                <div class="accordion-inner">
+                                    <a href="userinfo.html" class="normal1">用户信息</a>
+                                </div>
+                                <div class="accordion-inner">
+                                    <a href="about.html" class="normal1">关于</a>
                                 </div>
                             </div>
                         </div>
@@ -131,14 +152,11 @@
                     <div class="tabbable" id="tabs-74034">
                         <ul class="nav nav-tabs">
                             <li>
-                                <a href="#panel-715271" data-toggle="tab">第一部分</a>
-                            </li>
-                            <li class="active">
-                                <a href="#panel-665136" data-toggle="tab">第二部分</a>
+                                <a href="#panel-715271" data-toggle="tab">车况健康</a>
                             </li>
                         </ul>
                         <div class="tab-content">
-                            <div class="tab-pane" id="panel-715271">
+                            <div class="tab-pane active" id="panel-715271">
                                 <p class="lead" id="date">11</p>
                                 <button class="btn btn-info btn-large" type="button" id="refresh">立即检测</button>
                                 <table class="table table-striped">
@@ -161,7 +179,7 @@
                                     <tbody>
                                     <tr class="success">
                                         <td>
-                                            1
+                                            通讯系统
                                         </td>
                                         <td>
                                             <img src="image/resources_img_4mini.png" alt=""/>
@@ -175,7 +193,7 @@
                                     </tr>
                                     <tr class="error">
                                         <td>
-                                            2
+                                            供电系统
                                         </td>
                                         <td>
                                             <img src="image/resources_img_2mini.png" alt=""/>
@@ -189,7 +207,7 @@
                                     </tr>
                                     <tr class="warning">
                                         <td>
-                                            3
+                                            显示系统
                                         </td>
                                         <td>
                                             <img src="image/resources_img_3mini.png" alt=""/>
@@ -203,7 +221,7 @@
                                     </tr>
                                     <tr class="info">
                                         <td>
-                                            4
+                                            动力系统
                                         </td>
                                         <td>
                                             <img src="image/resources_img_1mini.png" alt=""/>
@@ -217,11 +235,6 @@
                                     </tr>
                                     </tbody>
                                 </table>
-                            </div>
-                            <div class="tab-pane active" id="panel-665136">
-                                <p>
-                                    第二部分内容.
-                                </p>
                             </div>
                         </div>
                     </div>
