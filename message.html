@@ -6,11 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">-->
     <link rel="stylesheet" href="css/bootstrap-combined.min.css"/>
-    <!--<link rel="stylesheet" href="css/editor_gecko.css"/>-->
-    <!--<link rel="stylesheet" href="css/editor.css"/>-->
+    <!--<link rel="stylesheet" href="css/editor_gecko.css"/>
+    <link rel="stylesheet" href="css/editor.css"/>-->
     <script type="text/javascript" src="js/jquery-2.1.1/jquery.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/jquery.htmlClean.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/jquery.searchableSelect.css" />
+    <script type="text/javascript" src="js/jquery.searchableSelect.js"></script>
     <!--<script type="text/javascript" src="js/jquery-ui.js"></script>-->
     <script type="text/javascript" src="js/scripts.js"></script>
     <script type="text/javascript" src="js/ckeditor.js"></script>
@@ -147,77 +149,43 @@
                     </div>
                 </div>
                 <div class="span9">
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th>
-                                用户信息
-                            </th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>
-                               用户名:
-                            </td>
-                            <td>
-                            </td>
-                            <td>
-                                wcc7
-                            </td>
-                            <td>
-                            </td>
-                        </tr>
-                        <tr class="success">
-                            <td>
-                                手机号:
-                            </td>
-                            <td>
-                            </td>
-                            <td>
-                                15151559580
-                            </td>
-                            <td>
-                            </td>
-                        </tr>
-                        <tr class="error">
-                            <td>
-                                设备号:
-                            </td>
-                            <td>
-                            </td>
-                            <td>
-                                709c3ffe1992419a70
-                            </td>
-                            <td>
-                            </td>
-                        </tr>
-                        <tr class="warning">
-                            <td>
-                                注册时间:
-                            </td>
-                            <td>
-                            </td>
-                            <td>
-                                2016-07-26 14:24:49
-                            </td>
-                            <td>
-                            </td>
-                        </tr>
-                        <tr class="info">
-                            <td>
-                                APP版本:
-                            </td>
-                            <td>
-                            </td>
-                            <td>
-                                V12 20160627110000
-                            </td>
-                            <td>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
+                    <div class="row-fluid">
+                        <div class="span9">
+                            <select>
+                                <option value="未读消息">未读消息</option>
+                                <option value="已读消息">已读消息</option>
+                                <option value="重要消息">重要消息</option>
+                                <option value="过期消息">过期消息</option>
+                            </select>
+                            <h2>
+                                标题
+                            </h2>
+                            <p>
+                                本可视化布局程序在HTML5浏览器上运行更加完美, 能实现自动本地化保存, 即使关闭了网页, 下一次打开仍然能恢复上一次的操作.
+                            </p>
+                            <p>
+                                <a class="btn" href="#">查看更多 »</a>
+                            </p>
+                            <a id="modal-932722" href="#modal-container-932722" role="button" class="btn" data-toggle="modal">下一条</a>
+
+                            <div id="modal-container-932722" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                    <h3 id="myModalLabel">
+
+                                    </h3>
+                                </div>
+                                <div class="modal-body">
+                                    <p>
+                                        是否标记为已读？
+                                    </p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn" data-dismiss="modal" aria-hidden="true">返回</button> <button class="btn btn-primary">确认</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

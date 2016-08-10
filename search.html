@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">-->
     <link rel="stylesheet" href="css/bootstrap-combined.min.css"/>
+    <link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css"/>
 <!--    <link rel="stylesheet" href="css/editor_gecko.css"/>
     <link rel="stylesheet" href="css/editor.css"/>-->
     <script type="text/javascript" src="js/jquery-2.1.1/jquery.min.js"></script>
@@ -16,6 +17,8 @@
     <script type="text/javascript" src="js/ckeditor.js"></script>
     <script type="text/javascript" src="js/config.js"></script>
     <script type="text/javascript" src="js/jquery.ui.touch-punch.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap-datetimepicker.min.js" ></script>
+    <script type="text/javascript" src="js/bootstrap-datetimepicker.zh-CN.js"></script>
     <style type="text/css">
         .normal1{
             text-decoration: none;
@@ -134,6 +137,16 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="accordion-group">
+                            <div class="accordion-heading">
+                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-773632" href="#accordion-element-42869">消息</a>
+                            </div>
+                            <div id="accordion-element-42869" class="accordion-body collapse">
+                                <div class="accordion-inner">
+                                    <a href="message.html" class="normal1">消息</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="span9">
@@ -146,9 +159,25 @@
                             <label>昨天</label>
                             <label><input type="text" /></label>
                             <label><input type="text" /></label>
-                            <label>自定义</label>
-                            <label><input type="text" /></label>
-                            <label><input type="text" /></label>
+                            <label>自定义查找（仅支持查询12小时内数据）</label>
+                            <div class="form-group">
+                                <label for="dtp_input1" class="col-md-2 control-label">日期选择</label>
+                                <div class="input-group date form_datetime col-md-5" data-date="2016-08-09T05:25:07Z" data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input1">
+                                    <input class="form-control" size="16" type="text" value="" readonly>
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                </div>
+                                <input type="hidden" id="dtp_input1" value="" /><br/>
+                            </div>
+                            <div class="form-group">
+                                <label for="dtp_input3" class="col-md-2 control-label">选择时间点</label>
+                                <div class="input-group date form_time col-md-5" data-date="" data-date-format="hh:ii" data-link-field="dtp_input3" data-link-format="hh:ii">
+                                    <input class="form-control" size="16" type="text" value="" readonly>
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
+                                </div>
+                                <input type="hidden" id="dtp_input3" value="" /><br/>
+                            </div>
                         </fieldset>
                         <button type="submit" class="btn btn-large btn-primary">搜索</button>
                     </form>
@@ -157,5 +186,38 @@
     </div>
 </div>
     </div>
+<script type="text/javascript">
+    $('.form_datetime').datetimepicker({
+        //language:  'fr',
+        weekStart: 1,
+        todayBtn:  1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 2,
+        forceParse: 0,
+        showMeridian: 1
+    });
+    $('.form_date').datetimepicker({
+        language:  'fr',
+        weekStart: 1,
+        todayBtn:  1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 2,
+        minView: 2,
+        forceParse: 0
+    });
+    $('.form_time').datetimepicker({
+        language:  'fr',
+        weekStart: 1,
+        todayBtn:  1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 1,
+        minView: 0,
+        maxView: 1,
+        forceParse: 0
+    });
+</script>
 </body>
 </html>
