@@ -67,7 +67,7 @@
     var point1 = new BMap.Marker(points[0], {icon: m1});
     map.addOverlay(point1);
     point1.addEventListener("click", function(){
-        map.openInfoWindow(infoWindow,new BMap.Point(ajson.coords[0].split(",")[0],ajson.coords[1].split(",")[1]));
+        map.openInfoWindow(infoWindow,point);
     });
     var mi = new BMap.Icon("http://api.map.baidu.com/img/markers.png", new BMap.Size(23, 25), {
         offset: new BMap.Size(10, 25),
