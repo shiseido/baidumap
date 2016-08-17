@@ -27,6 +27,7 @@
 <div id="container"></div>
 
 <script type="text/javascript">
+
     var opts = {
         width: 200,
         height: 100,
@@ -41,23 +42,22 @@
     var ajson = {
         "scale": 10,
         "center": "118.916812,32.109531",
-        "coords": ["118.916812,32.109531", "120.444,32.515", "120.377065,31.488258", "120.530972,31.314192"]
+        "coords": ["118.916812,32.109531", "120.444,32.515", "120.377065,31.488258", "120.530972,31.314192"],
+        "infowindow":["地址:1","地址:2"]
     };
     var map = new BMap.Map("container");
     map.enableScrollWheelZoom(true);
-    var infoWindow = new BMap.InfoWindow("地址：1", opts);
+    var infoWindow1 = new BMap.InfoWindow("地址：1", opts);
     var infoWindow2 = new BMap.InfoWindow("地址：2", opts);
-    var infoWindow3 = new BMap.InfoWindow("地址：3", opts);
-    var infoWindow4 = new BMap.InfoWindow("地址：4", opts);
-    var point = new BMap.Point(ajson.center.split(',')[0], ajson.center.split(',')[1], ajson.center.split(',')[2], ajson.center.split(',')[3]);
+    var point = new BMap.Point(ajson.center.split(',')[0], ajson.center.split(',')[1]);
     map.centerAndZoom(point, ajson.scale);
     points = [];
     for (var j = 0; j < ajson.coords.length; j++) {
         var p1 = ajson.coords[j].split(",")[0];
         var p2 = ajson.coords[j].split(",")[1];
-        var p3 = ajson.coords[j].split(",")[2];
-        var p4 = ajson.coords[j].split(",")[3];
-        points.push(new BMap.Point(p1, p2, p3, p4));
+        /*var p3 = ajson.coords[j].split(",")[2];
+        var p4 = ajson.coords[j].split(",")[3];*/
+        points.push(new BMap.Point(p1, p2));
     }
     map.addOverlay(new BMap.Polyline(points, {strokeColor: "blue", strokeWeight: 3, strokeOpacity: 0.5}));
     var m1 = new BMap.Icon("http://api.map.baidu.com/img/markers.png", new BMap.Size(23, 25), {
@@ -66,24 +66,27 @@
     });
     var point1 = new BMap.Marker(points[0], {icon: m1});
     map.addOverlay(point1);
+    point1.setAnimation(BMAP_ANIMATION_BOUNCE);
     point1.addEventListener("click", function(){
-        map.openInfoWindow(infoWindow,point);
+        map.openInfoWindow(infoWindow1,point);
     });
     var mi = new BMap.Icon("http://api.map.baidu.com/img/markers.png", new BMap.Size(23, 25), {
         offset: new BMap.Size(10, 25),
         imageOffset: new BMap.Size(0, 0 - 25)
     });
-    var point2 = new BMap.Marker(points[1], {icon: mi});
+    var point2 = new BMap.Marker(points[points.length - 1], {icon: mi});
     map.addOverlay(point2);
+    point2.setAnimation(BMAP_ANIMATION_BOUNCE);
     point2.addEventListener("click", function(){
-        map.openInfoWindow(infoWindow2,new BMap.Point(ajson.coords[1].split(",")[0],ajson.coords[1].split(",")[1]));
+        map.openInfoWindow(new Bmap.InfoWindow((ajson.infowindow[points.length - 1]),opts),new BMap.Point(ajson.coords[points.length - 1].split(",")[0],ajson.coords[points.length - 1].split(",")[1]));
     });
-    var m2 = new BMap.Icon("http://api.map.baidu.com/img/markers.png", new BMap.Size(23, 25), {
+    /*var m2 = new BMap.Icon("http://api.map.baidu.com/img/markers.png", new BMap.Size(23, 25), {
         offset: new BMap.Size(10, 25),
         imageOffset: new BMap.Size(0, 0 - 25)
     });
     var point3 = new BMap.Marker(points[2], {icon: m2});
     map.addOverlay(point3);
+    point3.setAnimation(BMAP_ANIMATION_BOUNCE);
     point3.addEventListener("click", function(){
         map.openInfoWindow(infoWindow3,new BMap.Point(ajson.coords[2].split(",")[0],ajson.coords[2].split(",")[1]));
     });
@@ -93,10 +96,15 @@
     });
     var point4 = new BMap.Marker(points[3], {icon: m3});
     map.addOverlay(point4);
+    point4.setAnimation(BMAP_ANIMATION_BOUNCE);
     point4.addEventListener("click", function(){
         map.openInfoWindow(infoWindow4,new BMap.Point(ajson.coords[3].split(",")[0],ajson.coords[3].split(",")[1]));
-    });
+    });*/
     var menu = new BMap.ContextMenu();
+  /*  function showInfo(e){
+        alert(e.point.lng + ", " + e.point.lat);
+    }
+    map.addEventListener("click", showInfo);*/
     var txtMenuItem = [
         {
             text: '放大',
@@ -109,7 +117,13 @@
             callback: function () {
                 map.zoomOut()
             }
-        }
+        },
+        {
+            text:'在此添加标注',
+            callback:function(p){
+                var marker = new BMap.Marker(p);
+                map.addOverlay(marker);
+            }}
     ];
     for (var i = 0; i < txtMenuItem.length; i++) {
         menu.addItem(new BMap.MenuItem(txtMenuItem[i].text, txtMenuItem[i].callback, 100));
@@ -135,6 +149,11 @@
         alert(e.message);
     });
     map.addControl(geolocationControl);
+    point1.addEventListener("click",getAttr);
+    function getAttr(){
+        var p = point1.getPosition();
+        alert("当前位置是" + p.lng + "," + p.lat);
+    }
 </script>
 </body>
 </html>
