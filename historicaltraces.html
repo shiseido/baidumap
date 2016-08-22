@@ -47,8 +47,6 @@
     };
     var map = new BMap.Map("container");
     map.enableScrollWheelZoom(true);
-    var infoWindow1 = new BMap.InfoWindow("地址：1", opts);
-    var infoWindow2 = new BMap.InfoWindow("地址：2", opts);
     var point = new BMap.Point(ajson.center.split(',')[0], ajson.center.split(',')[1]);
     map.centerAndZoom(point, ajson.scale);
     points = [];
@@ -60,25 +58,25 @@
         points.push(new BMap.Point(p1, p2));
     }
     map.addOverlay(new BMap.Polyline(points, {strokeColor: "blue", strokeWeight: 3, strokeOpacity: 0.5}));
-    var m1 = new BMap.Icon("http://api.map.baidu.com/img/markers.png", new BMap.Size(23, 25), {
+    var m1 = new BMap.Icon("image/marker.png", new BMap.Size(100,100), {
         offset: new BMap.Size(10, 25),
         imageOffset: new BMap.Size(0, 0 - 25)
     });
     var point1 = new BMap.Marker(points[0], {icon: m1});
     map.addOverlay(point1);
-    point1.setAnimation(BMAP_ANIMATION_BOUNCE);
+//    point1.setAnimation(BMAP_ANIMATION_BOUNCE);
     point1.addEventListener("click", function(){
-        map.openInfoWindow(infoWindow1,point);
+        map.openInfoWindow(new BMap.InfoWindow(ajson.infowindow[0], opts),point);
     });
-    var mi = new BMap.Icon("http://api.map.baidu.com/img/markers.png", new BMap.Size(23, 25), {
+    var mi = new BMap.Icon("image/marker.png", new BMap.Size(100,100), {
         offset: new BMap.Size(10, 25),
         imageOffset: new BMap.Size(0, 0 - 25)
     });
     var point2 = new BMap.Marker(points[points.length - 1], {icon: mi});
     map.addOverlay(point2);
-    point2.setAnimation(BMAP_ANIMATION_BOUNCE);
+//    point2.setAnimation(BMAP_ANIMATION_BOUNCE);
     point2.addEventListener("click", function(){
-        map.openInfoWindow(new Bmap.InfoWindow((ajson.infowindow[points.length - 1]),opts),new BMap.Point(ajson.coords[points.length - 1].split(",")[0],ajson.coords[points.length - 1].split(",")[1]));
+        map.openInfoWindow(new BMap.InfoWindow(ajson.infowindow[1], opts),new BMap.Point(ajson.coords[points.length - 1].split(",")[0],ajson.coords[points.length - 1].split(",")[1]));
     });
     /*var m2 = new BMap.Icon("http://api.map.baidu.com/img/markers.png", new BMap.Size(23, 25), {
         offset: new BMap.Size(10, 25),
@@ -152,6 +150,11 @@
     point1.addEventListener("click",getAttr);
     function getAttr(){
         var p = point1.getPosition();
+        alert("当前位置是" + p.lng + "," + p.lat);
+    }
+    point2.addEventListener("click",getAttr);
+    function getAttr(){
+        var p = point2.getPosition();
         alert("当前位置是" + p.lng + "," + p.lat);
     }
 </script>
