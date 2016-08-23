@@ -24,8 +24,8 @@
     <title>历史轨迹</title>
 </head>
 <body>
-<div id="container"></div>
-
+<div id="container" style="height: 100%"></div>
+<iframe src="http://www.baidu.com" frameborder="0" style="width: 100%;height: 30%;display: none"></iframe>
 <script type="text/javascript">
 
     var opts = {
@@ -43,7 +43,8 @@
         "scale": 10,
         "center": "118.916812,32.109531",
         "coords": ["118.916812,32.109531", "120.444,32.515", "120.377065,31.488258", "120.530972,31.314192"],
-        "infowindow":["地址:1","地址:2"]
+        "infowindow":["地址:1","地址:2"],
+        "repair":["121.263989,31.548362"]
     };
     var map = new BMap.Map("container");
     map.enableScrollWheelZoom(true);
@@ -53,8 +54,6 @@
     for (var j = 0; j < ajson.coords.length; j++) {
         var p1 = ajson.coords[j].split(",")[0];
         var p2 = ajson.coords[j].split(",")[1];
-        /*var p3 = ajson.coords[j].split(",")[2];
-        var p4 = ajson.coords[j].split(",")[3];*/
         points.push(new BMap.Point(p1, p2));
     }
     map.addOverlay(new BMap.Polyline(points, {strokeColor: "blue", strokeWeight: 3, strokeOpacity: 0.5}));
@@ -78,6 +77,7 @@
     point2.addEventListener("click", function(){
         map.openInfoWindow(new BMap.InfoWindow(ajson.infowindow[1], opts),new BMap.Point(ajson.coords[points.length - 1].split(",")[0],ajson.coords[points.length - 1].split(",")[1]));
     });
+
     /*var m2 = new BMap.Icon("http://api.map.baidu.com/img/markers.png", new BMap.Size(23, 25), {
         offset: new BMap.Size(10, 25),
         imageOffset: new BMap.Size(0, 0 - 25)
@@ -121,7 +121,14 @@
             callback:function(p){
                 var marker = new BMap.Marker(p);
                 map.addOverlay(marker);
-            }}
+            }
+        },
+        {
+            text: '编辑',
+            callback: function () {
+                window.open("json.html")
+            }
+        }
     ];
     for (var i = 0; i < txtMenuItem.length; i++) {
         menu.addItem(new BMap.MenuItem(txtMenuItem[i].text, txtMenuItem[i].callback, 100));
@@ -147,16 +154,20 @@
         alert(e.message);
     });
     map.addControl(geolocationControl);
-    point1.addEventListener("click",getAttr);
+
     function getAttr(){
-        var p = point1.getPosition();
-        alert("当前位置是" + p.lng + "," + p.lat);
+        for(var n=0;n<points.length;n++){
+            var p = points[n].getPosition();
+            alert("当前位置是" + p.lng + "," + p.lat);
+        }
     }
-    point2.addEventListener("click",getAttr);
+    getAttr();
+
+    /*point2.addEventListener("click",getAttr);
     function getAttr(){
         var p = point2.getPosition();
         alert("当前位置是" + p.lng + "," + p.lat);
-    }
+    }*/
 </script>
 </body>
 </html>

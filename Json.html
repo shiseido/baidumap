@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        *{margin: 0;padding: 0;list-style: none}
+        table{
+            width:95%;
+            border:1px solid black;
+            margin: 0 auto;
+            border-collapse: collapse;
+        }
+        table tr{
+            height: 50px;
+        }
+        table tr td{
+            border:1px solid black;
+            text-align: center;
+        }
+        thead,tfoot{background-color: violet}
+        table tbody tr:nth-of-type(even){background-color: orange}
+        table tbody tr:hover{background-color: #0099ff}
+    </style>
+    <script type="text/javascript">
+        var json = {
+            'caption': '维修站点',
+            "date": [{
+                "维修点": 1,
+                "联系人": "联系人1",
+                "联系电话": 1,
+                "坐标": "坐标1",
+                "地址": "地址1"
+            }, {
+                "维修点": 2,
+                "联系人": "联系人2",
+                "联系电话": 2,
+                "坐标": "坐标2",
+                "地址": "地址2"
+            }, {
+                "维修点": 3,
+                "联系人": "联系人3",
+                "联系电话": 3,
+                "坐标": "坐标3",
+                "地址": "地址3"
+            }, {
+                "维修点": 4,
+                "联系人": "联系人4",
+                "联系电话": 4,
+                "坐标": "坐标4",
+                "地址": "地址4"
+            }, {
+                "维修点": 5,
+                "联系人": "联系人5",
+                "联系电话": 5,
+                "坐标": "坐标5",
+                "地址": "地址5"
+            }, {
+                "维修点": 6,
+                "联系人": "联系人6",
+                "联系电话": 6,
+                "坐标": "坐标6",
+                "地址": "地址6"
+            }, {
+                "维修点": 7,
+                "联系人": "联系人7",
+                "联系电话": 7,
+                "坐标": "坐标7",
+                "地址": "地址7"
+            }, {
+                "维修点": 8,
+                "联系人": "联系人8",
+                "联系电话": 8,
+                "坐标": "坐标8",
+                "地址": "地址8"
+            }]
+        };
+
+        var del = function(me) {
+            var tr = me.parentNode.parentNode;
+            var tbody = tr.parentNode;
+            tbody.removeChild(tr);
+        };
+        var changeValue = function(me) {
+            var age = me.innerText;
+            me.innerText = '';
+            var txtAge = document.createElement('input');
+            txtAge.setAttribute('type', 'text');
+            txtAge.setAttribute('autofocus', true);
+            txtAge.setAttribute('value', age);
+            var btn = document.createElement('input');
+            btn.setAttribute('type', 'button');
+            btn.setAttribute('value', '确定');
+            btn.setAttribute('onclick', 'queding(this)');
+            me.appendChild(txtAge);
+            me.appendChild(btn);
+        };
+        var queding = function(me) {
+            var txtAge = me.previousSibling;
+            var age = txtAge.value;
+            var tdcj=me.parentNode.parentNode.lastChild;
+            tdcj.innerText=age*me.parentNode.nextSibling.innerText;
+            if (age == null || age == undefined || age < 0) {
+                me.parentNode.innerText = 0;
+            } else {
+                me.parentNode.innerText = age;
+            }
+        };
+        var dateTable = function(json, id) {
+            this.tr = json.date.length;
+            this.id = id;
+            this.caption = json.caption;
+            this.getCaption = function() {
+                var caption = '';
+                if (this.caption != undefined && this.caption != null) {
+                    caption = '<caption>' + this.caption + '</caption>';
+                }
+                return caption;
+            };
+            this.getThead = function() {
+                var thead = '<thead>';
+                for (var p in json.date[0]) {
+                    if (p == 'id') {
+                        thead += "<th>&nbsp;" + p + "</th>";
+                    } else {
+                        thead += '<th>' + p + '</th>';
+                    }
+                }
+                thead += "<th>操作</th>";
+                thead += "<th>备注</th>";
+                thead += '</thead>';
+                return thead;
+            };
+            this.getFoot = function() {
+                var tfoot = '<tfoot>';
+                for (var p in json.date[0]) {
+                        tfoot += '<th>' + p + '</th>';
+                }
+                tfoot += "<th><input type='button' value='添加' onclick='add()'/></th>";
+                tfoot += "<th>备注</th>";
+                tfoot += '</tfoot>';
+                return tfoot;
+            };
+            this.getTbody = function() {
+                var count;
+                var tbody = '<tbody>';
+                for (var i = 0; i < this.tr; i++) {
+                    tbody += '<tr>';
+                    count = 0;
+                    for (var p in json.date[i]) {
+                        count++;
+                            if (count == 2||count == 3||count == 4||count == 5) {
+                                tbody += "<td ondblclick='changeValue(this)'>" + json.date[i][p] + '</td>';
+                            } else {
+                                tbody += '<td>' + json.date[i][p] + '</td>';
+                        }
+                    }
+                    tbody += "<td><input type='button' value='删除' onclick='del(this)'/></td>";
+                    tbody +="<td><textarea cols='20' rows='3' style='vertical-align: middle'></textarea> </td>";
+
+                    tbody += '</tr>';
+                }
+                tbody += '</tbody>';
+                return tbody;
+            };
+            this.getHtml = function() {
+                var html = "<table id='t1'>";
+                html += this.getCaption();
+                html += this.getThead();
+                html += this.getFoot();
+                html += this.getTbody();
+                html += '</table>';
+                var id = document.getElementById(this.id);
+                id.innerHTML = html;
+            }
+        };
+        var add = function() {
+            var tr = document.createElement('tr');
+            for (var p in json.date[0]) {
+                var td = document.createElement('td');
+                tr.appendChild(td);
+            }
+            var td = document.createElement('td');
+            td.innerHTML = "<input type='button' value='删除' onclick='del(this)'/>";
+            tr.appendChild(td);
+            var td = document.createElement('td');
+            tr.appendChild(td);
+            var t1 = document.getElementById('t1');
+            t1.lastChild.appendChild(tr);
+        };
+        window.onload = function() {
+            var tab = new dateTable(json, 'div1');
+            tab.getHtml();
+        }
+    </script>
+</head>
+<body>
+<div id="div1"></div>
+</body>
+</html>
