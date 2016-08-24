@@ -25,7 +25,6 @@
 </head>
 <body>
 <div id="container" style="height: 100%"></div>
-<iframe src="http://www.baidu.com" frameborder="0" style="width: 100%;height: 30%;display: none"></iframe>
 <script type="text/javascript">
 
     var opts = {
@@ -33,7 +32,7 @@
         height: 100,
         title: "title",
         enableMessage: true,
-        message: "message"
+        message: "信息"
     };
     var r = window.location.search;
     if (r.indexOf("?") > -1) {
@@ -44,7 +43,15 @@
         "center": "118.916812,32.109531",
         "coords": ["118.916812,32.109531", "120.444,32.515", "120.377065,31.488258", "120.530972,31.314192"],
         "infowindow":["地址:1","地址:2"],
-        "repair":["121.263989,31.548362"]
+        "repair":["120.945026,31.4149381","120.673666,31.161152","120.610425,31.287638","120.635722,31.420855","120.536261,31.393241","120.302271,31.552405","120.414379,31.598674","120.298246,31.586124"],
+        "location":["地址:地址1</br>联系人:联系人1</br>联系电话:123456",
+            "地址:地址2</br>联系人:联系人1</br>联系电话:45232354",
+            "地址:地址3</br>联系人:联系人1</br>联系电话:45252228",
+            "地址:地址4</br>联系人:联系人1</br>联系电话:15875557",
+            "地址:地址5</br>联系人:联系人1</br>联系电话:22725452",
+            "地址:地址6</br>联系人:联系人1</br>联系电话:75272522",
+            "地址:地址7</br>联系人:联系人1</br>联系电话:72725774",
+            "地址:地址8</br>联系人:联系人1</br>联系电话:47416724"]
     };
     var map = new BMap.Map("container");
     map.enableScrollWheelZoom(true);
@@ -78,31 +85,9 @@
         map.openInfoWindow(new BMap.InfoWindow(ajson.infowindow[1], opts),new BMap.Point(ajson.coords[points.length - 1].split(",")[0],ajson.coords[points.length - 1].split(",")[1]));
     });
 
-    /*var m2 = new BMap.Icon("http://api.map.baidu.com/img/markers.png", new BMap.Size(23, 25), {
-        offset: new BMap.Size(10, 25),
-        imageOffset: new BMap.Size(0, 0 - 25)
-    });
-    var point3 = new BMap.Marker(points[2], {icon: m2});
-    map.addOverlay(point3);
-    point3.setAnimation(BMAP_ANIMATION_BOUNCE);
-    point3.addEventListener("click", function(){
-        map.openInfoWindow(infoWindow3,new BMap.Point(ajson.coords[2].split(",")[0],ajson.coords[2].split(",")[1]));
-    });
-    var m3 = new BMap.Icon("http://api.map.baidu.com/img/markers.png", new BMap.Size(23, 25), {
-        offset: new BMap.Size(10, 25),
-        imageOffset: new BMap.Size(0, 0 - 25)
-    });
-    var point4 = new BMap.Marker(points[3], {icon: m3});
-    map.addOverlay(point4);
-    point4.setAnimation(BMAP_ANIMATION_BOUNCE);
-    point4.addEventListener("click", function(){
-        map.openInfoWindow(infoWindow4,new BMap.Point(ajson.coords[3].split(",")[0],ajson.coords[3].split(",")[1]));
-    });*/
+
     var menu = new BMap.ContextMenu();
-  /*  function showInfo(e){
-        alert(e.point.lng + ", " + e.point.lat);
-    }
-    map.addEventListener("click", showInfo);*/
+
     var txtMenuItem = [
         {
             text: '放大',
@@ -154,20 +139,35 @@
         alert(e.message);
     });
     map.addControl(geolocationControl);
+    for(var n=0;n<ajson.repair.length;n++) {
+        var repoint = new BMap.Point(ajson.repair[n].split(",")[0], ajson.repair[n].split(",")[1]);
 
-    function getAttr(){
-        for(var n=0;n<points.length;n++){
-            var p = points[n].getPosition();
-            alert("当前位置是" + p.lng + "," + p.lat);
+        var myLabel = new BMap.Label("<p></p>",
+                {
+                    offset: new BMap.Size(-60, -60),
+                    position: repoint
+                });
+        myLabel.setStyle({
+            fontSize: "14px",
+            border: "0",
+            height: "70px",
+            width: "75px",
+            textAlign: "center",
+            lineHeight: "70px",
+            background: "url(image/repair.png)",
+            cursor: "pointer",
+            color: "black"
+        });
+        myLabel.setTitle("维修站信息");
+        map.addOverlay(myLabel);
+        for (var m = 0; m < ajson.location.length; m++) {
+            var repairinfoWindow = new BMap.InfoWindow(ajson.location[m],(ajson.repair[n].split(",")[0],ajson.repair[n].split(",")[1]));
+
+            myLabel.addEventListener("click", function () {
+                map.openInfoWindow(repairinfoWindow, repoint);
+            });
         }
     }
-    getAttr();
-
-    /*point2.addEventListener("click",getAttr);
-    function getAttr(){
-        var p = point2.getPosition();
-        alert("当前位置是" + p.lng + "," + p.lat);
-    }*/
 </script>
 </body>
 </html>
