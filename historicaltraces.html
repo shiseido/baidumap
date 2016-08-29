@@ -17,7 +17,7 @@
     #container {
         height: 100%
     }</style>
-    <script src="//cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
+    <script src="http://cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
     <script type="text/javascript"
             src="http://api.map.baidu.com/api?v=2.0&ak=O1uMKSR3d1GHlmzxrMSvXbTWdRfrwUHR"></script>
     <script type="text/javascript" src="http://api.map.baidu.com/library/CurveLine/1.5/src/CurveLine.min.js"></script>
@@ -141,8 +141,7 @@
     map.addControl(geolocationControl);
     for(var n=0;n<ajson.repair.length;n++) {
         var repoint = new BMap.Point(ajson.repair[n].split(",")[0], ajson.repair[n].split(",")[1]);
-
-        var myLabel = new BMap.Label("<p></p>",
+        var myLabel = new BMap.Label("",
                 {
                     offset: new BMap.Size(-60, -60),
                     position: repoint
@@ -160,11 +159,10 @@
         });
         myLabel.setTitle("维修站信息");
         map.addOverlay(myLabel);
-            var repairinfoWindow = new BMap.InfoWindow((ajson.location[n]),(BMap.Point(ajson.repair[n].split(",")[0], ajson.repair[n].split(",")[1])));
+            var repairinfoWindow = new BMap.InfoWindow(ajson.location[n],(ajson.repair[n].split(",")[0],ajson.repair[n].split(",")[1]));
             myLabel.addEventListener("click", function () {
                 map.openInfoWindow(repairinfoWindow, repoint);
             });
-
     }
 </script>
 </body>
