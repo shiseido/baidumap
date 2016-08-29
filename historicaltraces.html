@@ -139,10 +139,12 @@
         alert(e.message);
     });
     map.addControl(geolocationControl);
+    rpoints=[];
     for(var n=0;n<ajson.repair.length;n++) {
-        var repoint = new BMap.Point(ajson.repair[n].split(",")[0], ajson.repair[n].split(",")[1]);
-
-        var myLabel = new BMap.Label("<p></p>",
+        var rp1 = ajson.repair[n].split(",")[0];
+        var rp2 = ajson.repair[n].split(",")[1];
+        rpoints.push(new BMap.Point(rp1, rp2));
+       /* var myLabel = new BMap.Label("",
                 {
                     offset: new BMap.Size(-60, -60),
                     position: repoint
@@ -158,13 +160,12 @@
             cursor: "pointer",
             color: "black"
         });
-        myLabel.setTitle("维修站信息");
-        map.addOverlay(myLabel);
-            var repairinfoWindow = new BMap.InfoWindow((ajson.location[n]),(BMap.Point(ajson.repair[n].split(",")[0], ajson.repair[n].split(",")[1])));
-            myLabel.addEventListener("click", function () {
-                map.openInfoWindow(repairinfoWindow, repoint);
+        myLabel.setTitle("维修站信息");*/
+        map.addOverlay(repoint);
+//            var repairinfoWindow = new BMap.InfoWindow((ajson.location[n]),new BMap.Point(ajson.repair[n].split(",")[0],ajson.repair[n].split(",")[1]));
+            repoint.addEventListener("click", function () {
+                map.openInfoWindow(new BMap.InfoWindow(ajson.location[0], opts),new BMap.Point(ajson.repair[0].split(",")[0],ajson.repair[0].split(",")[1]));
             });
-
     }
 </script>
 </body>
