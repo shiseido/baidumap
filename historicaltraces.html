@@ -44,14 +44,14 @@
         "coords": ["118.916812,32.109531", "120.444,32.515", "120.377065,31.488258", "120.530972,31.314192"],
         "infowindow":["地址:1","地址:2"],
         "repair":["120.945026,31.4149381","120.673666,31.161152","120.610425,31.287638","120.635722,31.420855","120.536261,31.393241","120.302271,31.552405","120.414379,31.598674","120.298246,31.586124"],
-        "location":["地址:地址1</br>联系人:联系人1</br>联系电话:123456",
-            "地址:地址2</br>联系人:联系人2</br>联系电话:45232354",
-            "地址:地址3</br>联系人:联系人3</br>联系电话:45252228",
-            "地址:地址4</br>联系人:联系人4</br>联系电话:15875557",
-            "地址:地址5</br>联系人:联系人5</br>联系电话:22725452",
-            "地址:地址6</br>联系人:联系人6</br>联系电话:75272522",
-            "地址:地址7</br>联系人:联系人7</br>联系电话:72725774",
-            "地址:地址8</br>联系人:联系人8</br>联系电话:47416724"]
+        "location":["地址:地址1</br>联系人:联系人1</br>联系电话:123456/<br/>备注",
+            "地址:地址2</br>联系人:联系人2</br>联系电话:45232354<br/>备注",
+            "地址:地址3</br>联系人:联系人3</br>联系电话:45252228<br/>备注",
+            "地址:地址4</br>联系人:联系人4</br>联系电话:15875557<br/>备注",
+            "地址:地址5</br>联系人:联系人5</br>联系电话:22725452<br/>备注",
+            "地址:地址6</br>联系人:联系人6</br>联系电话:75272522<br/>备注",
+            "地址:地址7</br>联系人:联系人7</br>联系电话:72725774<br/>备注",
+            "地址:地址8</br>联系人:联系人8</br>联系电话:47416724<br/>备注"]
     };
     var map = new BMap.Map("container");
     map.enableScrollWheelZoom(true);
@@ -139,31 +139,47 @@
         alert(e.message);
     });
     map.addControl(geolocationControl);
+    var repoints=[];
     for(var n=0;n<ajson.repair.length;n++) {
-        var repoint = new BMap.Point(ajson.repair[n].split(",")[0], ajson.repair[n].split(",")[1]);
-        var myLabel = new BMap.Label("",
-                {
-                    offset: new BMap.Size(-60, -60),
-                    position: repoint
-                });
-        myLabel.setStyle({
+        repoints.push(new BMap.Point(ajson.repair[n].split(",")[0], ajson.repair[n].split(",")[1]));
+    }
+//        var repoint = new BMap.Point(ajson.repair[n].split(",")[0], ajson.repair[n].split(",")[1]);
+        /*var reopts={
+            offset: new BMap.Size(-60, -60),
+            position: repoints
+        };*/
+    var rm = new BMap.Icon("image/repair.png", new BMap.Size(45,45), {
+        offset: new BMap.Size(-60, -60)
+    });
+//        var myLabel = new BMap.Label("");
+
+       /* myLabel.setStyle({
             fontSize: "14px",
             border: "0",
-            height: "70px",
-            width: "75px",
+            height: "42px",
+            width: "45px",
             textAlign: "center",
-            lineHeight: "70px",
+            lineHeight: "40px",
             background: "url(image/repair.png)",
             cursor: "pointer",
             color: "black"
         });
-        myLabel.setTitle("维修站信息");
-        map.addOverlay(myLabel);
-            var repairinfoWindow = new BMap.InfoWindow(ajson.location[n],(ajson.repair[n].split(",")[0],ajson.repair[n].split(",")[1]));
-            myLabel.addEventListener("click", function () {
+        myLabel.setTitle("维修站信息");*/
+//    map.addOverlay(myLabel);
+    for (var m = 0; m < repoints.length; m++) {
+        var this_point = new BMap.Marker(repoints[m], {icon: rm});
+        map.addOverlay(this_point);
+        this_point.addEventListener("click", function (data) {
+            var temp = new BMap.Point(data.point.lng, data.point.lat);
+            map.openInfoWindow(new BMap.InfoWindow(ajson.location[0], opts), temp);
+        });
+    }
+       /* map.addOverlay(myLabel);
+            var repairinfoWindow = new BMap.InfoWindow(ajson.location[3],reopts,(new BMap.Point(ajson.repair[n].split(",")[0],ajson.repair[n].split(",")[1])));
+            myLabel.addEventListener("click", function (data) {
                 map.openInfoWindow(repairinfoWindow, repoint);
             });
-    }
+    }*/
 </script>
 </body>
 </html>
