@@ -70,7 +70,7 @@
     });
     var point1 = new BMap.Marker(points[0], {icon: m1});
     map.addOverlay(point1);
-//    point1.setAnimation(BMAP_ANIMATION_BOUNCE);
+    //    point1.setAnimation(BMAP_ANIMATION_BOUNCE);
     point1.addEventListener("click", function(){
         map.openInfoWindow(new BMap.InfoWindow(ajson.infowindow[0], opts),point);
     });
@@ -80,7 +80,7 @@
     });
     var point2 = new BMap.Marker(points[points.length - 1], {icon: mi});
     map.addOverlay(point2);
-//    point2.setAnimation(BMAP_ANIMATION_BOUNCE);
+    //    point2.setAnimation(BMAP_ANIMATION_BOUNCE);
     point2.addEventListener("click", function(){
         map.openInfoWindow(new BMap.InfoWindow(ajson.infowindow[1], opts),new BMap.Point(ajson.coords[points.length - 1].split(",")[0],ajson.coords[points.length - 1].split(",")[1]));
     });
@@ -143,29 +143,29 @@
     for(var n=0;n<ajson.repair.length;n++) {
         repoints.push(new BMap.Point(ajson.repair[n].split(",")[0], ajson.repair[n].split(",")[1]));
     }
-//        var repoint = new BMap.Point(ajson.repair[n].split(",")[0], ajson.repair[n].split(",")[1]);
-        /*var reopts={
-            offset: new BMap.Size(-60, -60),
-            position: repoints
-        };*/
+    //        var repoint = new BMap.Point(ajson.repair[n].split(",")[0], ajson.repair[n].split(",")[1]);
+    /*var reopts={
+     offset: new BMap.Size(-60, -60),
+     position: repoints
+     };*/
     var rm = new BMap.Icon("image/repair.png", new BMap.Size(45,45), {
         offset: new BMap.Size(-60, -60)
     });
-//        var myLabel = new BMap.Label("");
+    //        var myLabel = new BMap.Label("");
 
-       /* myLabel.setStyle({
-            fontSize: "14px",
-            border: "0",
-            height: "42px",
-            width: "45px",
-            textAlign: "center",
-            lineHeight: "40px",
-            background: "url(image/repair.png)",
-            cursor: "pointer",
-            color: "black"
-        });
-        myLabel.setTitle("维修站信息");*/
-//    map.addOverlay(myLabel);
+    /* myLabel.setStyle({
+     fontSize: "14px",
+     border: "0",
+     height: "42px",
+     width: "45px",
+     textAlign: "center",
+     lineHeight: "40px",
+     background: "url(image/repair.png)",
+     cursor: "pointer",
+     color: "black"
+     });
+     myLabel.setTitle("维修站信息");*/
+    //    map.addOverlay(myLabel);
     for (var m = 0; m < repoints.length; m++) {
         var this_point = new BMap.Marker(repoints[m], {icon: rm});
         map.addOverlay(this_point);
@@ -174,12 +174,12 @@
             map.openInfoWindow(new BMap.InfoWindow(ajson.location[0], opts), temp);
         });
     }
-       /* map.addOverlay(myLabel);
-            var repairinfoWindow = new BMap.InfoWindow(ajson.location[3],reopts,(new BMap.Point(ajson.repair[n].split(",")[0],ajson.repair[n].split(",")[1])));
-            myLabel.addEventListener("click", function (data) {
-                map.openInfoWindow(repairinfoWindow, repoint);
-            });
-    }*/
+    /* map.addOverlay(myLabel);
+     var repairinfoWindow = new BMap.InfoWindow(ajson.location[3],reopts,(new BMap.Point(ajson.repair[n].split(",")[0],ajson.repair[n].split(",")[1])));
+     myLabel.addEventListener("click", function (data) {
+     map.openInfoWindow(repairinfoWindow, repoint);
+     });
+     }*/
 </script>
 </body>
 </html>
