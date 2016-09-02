@@ -56,6 +56,9 @@
                 index += 100;
                 $('#lll').html("半径:"+index);
             }
+            map.clearOverlays(circle);
+            var circle = new BMap.Circle(point, index, {strokeColor: "blue", strokeWeight: 2, strokeOpacity: 0.5});
+            map.addOverlay(circle);
         });
 
       /*  var marker = new BMap.Marker(new BMap.Point(118.916812, 32.109531));
