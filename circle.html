@@ -13,46 +13,110 @@
     <script type="text/javascript" src="js/jquery.min.js"></script>
 </head>
 <body>
-<div style="height: 10%;">
-    <div style="display: inline;">
-        <button class="button  button-primary  button-box button-large" id="decrease"> <i class="fa fa-plus"> - </i></button>
-    </div>
-    <div style="display: inline-block;">
-        <p> <span id="lll">半径:500</span></p>
-    </div>
-    <div style="display: inline;">
-        <button class="button  button-primary  button-box button-large" id="plus"> <i class="fa fa-plus"> + </i></button>
-    </div>
-    <div style="display: inline-block;">
-        <p style="font-size: 0.25rem">设置圆的半径(100-1000)单位/米</p>
-    </div>
-
-
-</div>
-<div id="allmap" style="height: 90%"></div>
+<div id="allmap" style="height: 100%"></div>
 </body>
 </html>
 <script type="text/javascript">
     var map = new BMap.Map("allmap");
     var point = new BMap.Point(118.916812,32.109531);
+
+   /* map.addEventListener("click",function(e){
+        longitude = e.point.lng;
+        latitude = e.point.lat;
+        point = new BMap.Point(longitude,latitude);
+        var marker = new BMap.Marker(point);
+        var circle = new BMap.Circle(point, 500, {strokeColor: "blue", strokeWeight: 2, strokeOpacity: 0.5});
+        map.clearOverlays(circle);
+        map.addOverlay(circle);
+        map.clearOverlays(marker);
+        map.addOverlay(marker);
+        map.centerAndZoom(point, 15);
+    });*/
+
     map.centerAndZoom(point, 15);
+    function ZoomControl(){
+        this.defaultAnchor = BMAP_ANCHOR_TOP_LEFT;
+        this.defaultOffset = new BMap.Size(10, 10);
+    }
+    ZoomControl.prototype = new BMap.Control();
+    ZoomControl.prototype.initialize = function(map){
+        var div = document.createElement("button");
+        div.appendChild(document.createTextNode("增加"));
+        div.style.cursor = "pointer";
+        div.style.border = "1px solid gray";
+        div.style.backgroundColor = "white";
+        div.id="plus";
+        map.getContainer().appendChild(div);
+        return div;
+    };
+    var myZoomCtrl = new ZoomControl();
+    map.addControl(myZoomCtrl);
+    function ZoomControl1(){
+        this.defaultAnchor = BMAP_ANCHOR_TOP_LEFT;
+        this.defaultOffset = new BMap.Size(10, 30);
+    }
+    ZoomControl1.prototype = new BMap.Control();
+    ZoomControl1.prototype.initialize = function(map) {
+        var div1 = document.createElement("button");
+        div1.appendChild(document.createTextNode("减少"));
+        div1.style.cursor = "pointer";
+        div1.style.border = "1px solid gray";
+        div1.style.backgroundColor = "white";
+        div1.id="decrease";
+        map.getContainer().appendChild(div1);
+        return div1;
+    };
+    var myZoomCtrl1 = new ZoomControl1();
+    map.addControl(myZoomCtrl1);
+    function ZoomControl2(){
+        this.defaultAnchor = BMAP_ANCHOR_TOP_LEFT;
+        this.defaultOffset = new BMap.Size(10, 50);
+    }
+    ZoomControl2.prototype = new BMap.Control();
+    ZoomControl2.prototype.initialize = function(map) {
+        var div2 = document.createElement("button");
+        div2.appendChild(document.createTextNode("提交"));
+        div2.style.cursor = "pointer";
+        div2.style.border = "1px solid gray";
+        div2.style.backgroundColor = "white";
+        map.getContainer().appendChild(div2);
+        return div2;
+    };
+    var myZoomCtrl2 = new ZoomControl2();
+    map.addControl(myZoomCtrl2);
+
     $(document).ready(function () {
         var index = 500;
+        map.addEventListener("click",function(e){
+            longitude = e.point.lng;
+            latitude = e.point.lat;
+            point = new BMap.Point(longitude,latitude);
+            var marker = new BMap.Marker(point);
+            var circle = new BMap.Circle(point, index, {strokeColor: "blue", strokeWeight: 2, strokeOpacity: 0.5});
+//            map.clearOverlays(circle);
+            map.addOverlay(circle);
+            map.clearOverlays(marker);
+            map.addOverlay(marker);
+            map.centerAndZoom(point, 15);
+        });
         var marker = new BMap.Marker(point);
         map.addOverlay(marker);
         var circle = new BMap.Circle(point, index, {strokeColor: "blue", strokeWeight: 2, strokeOpacity: 0.5});
         map.addOverlay(circle);
         circle.enableMassClear();
+        marker.enableDragging();
+//        circle.enableEditing();
         $('#decrease').click(function () {
             if (index > 100 && index <= 1000) {
                 index -= 100;
-                $('#lll').html("半径:"+index);
             }
             map.clearOverlays(circle);
             var circle = new BMap.Circle(point, index, {strokeColor: "blue", strokeWeight: 2, strokeOpacity: 0.5});
             map.addOverlay(circle);
             var marker = new BMap.Marker(point);
             map.addOverlay(marker);
+            marker.enableDragging();
+//            circle.enableEditing();
         });
         $('#plus').click(function () {
             if (index >= 0 && index <= 900) {
@@ -64,15 +128,10 @@
             map.addOverlay(circle);
             var marker = new BMap.Marker(point);
             map.addOverlay(marker);
+            marker.enableDragging();
+//            circle.enableEditing();
         });
 
-      /*  var marker = new BMap.Marker(new BMap.Point(118.916812, 32.109531));
-        map.addOverlay(marker);
-        var circle = new BMap.Circle(point, index, {strokeColor: "blue", strokeWeight: 2, strokeOpacity: 0.5});
-
-        map.addOverlay(circle);*/
-//        circle.enableEditing();
-//    alert(circle.getRadius());
         var navigationControl = new BMap.NavigationControl({
             anchor: BMAP_ANCHOR_BOTTOM_RIGHT,
             type: BMAP_NAVIGATION_CONTROL_LARGE,
