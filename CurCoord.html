@@ -17,7 +17,7 @@
     #container {
         height: 100%
     }</style>
-    <script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://libs.baidu.com/jquery/1.4.2/jquery.min.js"></script>
     <script type="text/javascript"
             src="http://api.map.baidu.com/api?v=2.0&ak=O1uMKSR3d1GHlmzxrMSvXbTWdRfrwUHR"></script>
     <script type="text/javascript" src="http://api.map.baidu.com/library/CurveLine/1.5/src/CurveLine.min.js"></script>
@@ -33,7 +33,7 @@
     }
     $.ajax({
         type: "Get",
-        url: "http://www.beelinker.net/api/GetCoords.json",
+        url: "GetCoords.json",
         data: r,
         dataType: "json",
         error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -62,6 +62,7 @@
             });
             map.addOverlay(new BMap.Marker(points[points.length - 1], {icon: mi}));
         }
+
     });
 
 </script>
