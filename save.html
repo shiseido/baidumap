@@ -17,6 +17,7 @@
         }
     </style>
     <script>
+        /*用户信息*/
         var usergroups = [
             {usergroupid:'1',name:'管理员'},
             {usergroupid:'2',name:'用户'},
@@ -25,7 +26,7 @@
             $('#tt').datagrid({
                 title:'用户信息表',
                 iconCls:'',
-                width:1080,
+                width:1000,
                 height:400,
                 singleSelect:true,
                 idField:'usernumber',
@@ -80,6 +81,46 @@
                     updateActions(index);
                 }
             });
+            $('#usergroup').datagrid({
+                title:'用户组',
+                iconCls:'',
+                width:200,
+                height:600,
+                singleSelect:true,
+                idField:'usergroupnumber',
+                url:'',
+                columns:[[
+                    {field:'usergroupnumber',title:'组编号',width:60,editor:'text'},
+                    {field:'usergroupname',title:'组名',width:100,editor:'text'},
+                    {field:'action',title:'状态',width:80,align:'center',
+                        formatter:function(value,row,index){
+                            if (row.editing){
+                                var s = '<a href="#" onclick="saverow1(this)">保存</a> ';
+                                var c = '<a href="#" onclick="cancelrow1(this)">取消</a>';
+                                return s+c;
+                            } else {
+                                var e = '<a href="#" onclick="editrow1(this)">编辑</a> ';
+                                var d = '<a href="#" onclick="deleterow1(this)">删除</a>';
+                                return e+d;
+                            }
+                        }
+                    }
+                ]],
+                onBeforeEdit:function(index,row){
+                    row.editing = true;
+                    updateActions1(index);
+                },
+                onAfterEdit:function(index,row){
+                    row.editing = false;
+                    updateActions1(index);
+                },
+                onCancelEdit:function(index,row){
+                    row.editing = false;
+                    updateActions1(index);
+                }
+            });
+
+
         });
         function updateActions(index){
             $('#tt').datagrid('updateRow',{
@@ -123,6 +164,91 @@
             $('#tt').datagrid('selectRow',index);
             $('#tt').datagrid('beginEdit',index);
         }
+        /*用户组js*/
+        function insert1(){
+            var row = $('#usergroup').datagrid('getSelected');
+            if (row){
+                var index = $('#usergroup').datagrid('getRowIndex', row);
+            } else {
+                index = 0;
+            }
+            $('#usergroup').datagrid('insertRow', {
+                index: index,
+                row:{
+
+                }
+            });
+            $('#usergroup').datagrid('selectRow',index);
+            $('#usergroup').datagrid('beginEdit',index);
+        }
+        function updateActions1(index){
+            $('#usergroup').datagrid('updateRow',{
+                index: index,
+                row:{}
+            });
+        }
+        function getRowIndex1(target){
+            var tr = $(target).closest('tr.datagrid-row');
+            return parseInt(tr.attr('datagrid-row-index'));
+        }
+        function editrow1(target){
+            $('#tt').datagrid('beginEdit', getRowIndex(target));
+        }
+        function deleterow1(target){
+            $.messager.confirm('Confirm','Are you sure?',function(r){
+                if (r){
+                    $('#usergroup').datagrid('deleteRow', getRowIndex(target));
+                }
+            });
+        }
+        function saverow1(target){
+            $('#usergroup').datagrid('endEdit', getRowIndex(target));
+        }
+        function cancelrow1(target){
+            $('#usergroup').datagrid('cancelEdit', getRowIndex(target));
+        }
+
+        function toright() {
+            var sel1 = document.getElementById('sel1');
+            var sel2 = document.getElementById('sel2');
+            var sel1option = document.getElementsByTagName('option');
+            var len = sel1option.length;
+            for (var i = 0; i < len; i++) {
+                if (sel1.selectedIndex !== -1) {
+                    sel2.appendChild(sel1option[sel1.selectedIndex]);
+                }
+            }
+        }
+
+        function toleft() {
+            var sel1 = document.getElementById('sel1');
+            var sel2 = document.getElementById('sel2');
+            var len = sel2.length;
+            for (var i = 0; i < len; i++) {
+                if (sel2.selectedIndex != -1) {
+                    sel1.appendChild(sel2[sel2.selectedIndex]);
+                }
+            }
+        }
+
+        function allright() {
+            var sel1 = document.getElementById('sel1');
+            var sel2 = document.getElementById('sel2');
+            var sel1option = document.getElementsByTagName('option');
+            var len = sel1option.length;
+            for (i = 0; i < len; i++) {
+                sel2.appendChild(sel1option[0]);
+            }
+        }
+
+        function allleft() {
+            var sel1 = document.getElementById('sel1');
+            var sel2 = document.getElementById('sel2');
+            var len = sel2.length;
+            for (i = 0; i < len; i++) {
+                sel1.appendChild(sel2[0]);
+            }
+        }
     </script>
 </head>
 <body>
@@ -131,49 +257,18 @@ background: #fafafa;">
 <div id="permissions" class="easyui-layout" fit="true">
     &lt;!&ndash;用户组信息&ndash;&gt;
     <div region="west" split="true" style="width: 220px;">
-        <table id="usergroup" class="easyui-datagrid" style="width:200px;height:90%"
+        <table id="usergroup" class="easyui-datagrid"
                url=""
                toolbar="#toolbar1"
                fitColumns="true" singleSelect="true">
-            <thead>
-            <tr>
-                <th field="name1" width="60">编号</th>
-                <th field="name2" width="140" style="text-align: center">组名</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>1111111</td>
-                <td>fly</td>
-            </tr>
-            </tbody>
+
         </table>
         <div id="toolbar1" style="padding:5px;height:auto">
             <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true"
-               onclick="newUser1()">添加</a>
-            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true"
-               onclick="editUser1()">编辑</a>
-            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true"
-               onclick="destroyUser1()">删除</a>
+               onclick="insert1()">添加</a>
         </div>
-        <div id="dlg1" class="easyui-dialog" style="width:400px"
-             closed="true" buttons="#dlg1-buttons">
-            <form id="fm1" method="post" novalidate style="margin:0;padding:20px 50px">
-                <div style="margin-bottom:20px;font-size:14px;border-bottom:1px solid #ccc">用户组信息</div>
-                <div style="margin-bottom:10px">
-                    <input name="number" class="easyui-textbox" required="true" label="编号:" style="width:100%">
-                </div>
-                <div style="margin-bottom:10px">
-                    <input name="groupname" class="easyui-textbox" required="true" label="组名:" style="width:100%">
-                </div>
-            </form>
-        </div>
-        <div id="dlg1-buttons">
-            <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveUser1()"
-               style="width:90px">保存</a>
-            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel"
-               onclick="javascript:$('#dlg1').dialog('close')" style="width:90px">取消</a>
-        </div>
+
+
     </div>
     &lt;!&ndash;右上侧权限列表&ndash;&gt;
     <div region="center" border="false">
@@ -215,7 +310,9 @@ background: #fafafa;">
                 </tr>
             </table>
         </div>
+        <div region="">
 
+        </div>
         <table id="tt"  class="easyui-datagrid"
                url=""
                toolbar="#toolbar2" pagination="true"
@@ -226,6 +323,8 @@ background: #fafafa;">
                onclick="insert()">添加</a>
 
         </div>
-
+</div>
+    </div>
+    </div>
 </body>
 </html>
