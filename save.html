@@ -1,0 +1,231 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="keywords" content="jquery,ui,easy,easyui,web">
+    <meta name="description" content="easyui help you build your web page easily!">
+    <title>用户管理</title>
+    <link rel="stylesheet" type="text/css" href="http://www.w3cschool.cc/try/jeasyui/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="http://www.w3cschool.cc/try/jeasyui/themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="http://www.w3cschool.cc/try/jeasyui/demo/demo.css">
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.6.1.min.js"></script>
+    <script type="text/javascript" src="http://www.w3cschool.cc/try/jeasyui/jquery.easyui.min.js"></script>
+    <style>
+        select{
+            width:140px;
+            height:250px;
+        }
+    </style>
+    <script>
+        var usergroups = [
+            {usergroupid:'1',name:'管理员'},
+            {usergroupid:'2',name:'用户'},
+        ];
+        $(function(){
+            $('#tt').datagrid({
+                title:'用户信息表',
+                iconCls:'',
+                width:1080,
+                height:400,
+                singleSelect:true,
+                idField:'usernumber',
+                url:'',
+                columns:[[
+                    {field:'usernumber',title:'用户编号',width:60,editor:'text'},
+                    {field:'productid',title:'用户组别',width:100,
+                        formatter:function(value){
+                            for(var i=0; i<usergroups.length; i++){
+                                if (usergroups[i].usergroupid == value) return usergroups[i].name;
+                            }
+                            return value;
+                        },
+                        editor:{
+                            type:'combobox',
+                            options:{
+                                valueField:'usergroupid',
+                                textField:'name',
+                                data:usergroups,
+                                required:true
+                            }
+                        }
+                    },
+                    {field:'username',title:'用户名',width:180,editor:'text'},
+                    {field:'password',title:'密码',width:50,align:'center', editor:'numberbox'},
+                    {field:'tel',title:'电话',width:80,align:'right',editor:{type:'numberbox',options:{precision:1}}},
+                    {field:'machinenumber',title:'设备号',width:80,align:'right',editor:'numberbox'},
+                    {field:'action',title:'状态',width:80,align:'center',
+                        formatter:function(value,row,index){
+                            if (row.editing){
+                                var s = '<a href="#" onclick="saverow(this)">保存</a> ';
+                                var c = '<a href="#" onclick="cancelrow(this)">取消</a>';
+                                return s+c;
+                            } else {
+                                var e = '<a href="#" onclick="editrow(this)">编辑</a> ';
+                                var d = '<a href="#" onclick="deleterow(this)">删除</a>';
+                                return e+d;
+                            }
+                        }
+                    }
+                ]],
+                onBeforeEdit:function(index,row){
+                    row.editing = true;
+                    updateActions(index);
+                },
+                onAfterEdit:function(index,row){
+                    row.editing = false;
+                    updateActions(index);
+                },
+                onCancelEdit:function(index,row){
+                    row.editing = false;
+                    updateActions(index);
+                }
+            });
+        });
+        function updateActions(index){
+            $('#tt').datagrid('updateRow',{
+                index: index,
+                row:{}
+            });
+        }
+        function getRowIndex(target){
+            var tr = $(target).closest('tr.datagrid-row');
+            return parseInt(tr.attr('datagrid-row-index'));
+        }
+        function editrow(target){
+            $('#tt').datagrid('beginEdit', getRowIndex(target));
+        }
+        function deleterow(target){
+            $.messager.confirm('Confirm','Are you sure?',function(r){
+                if (r){
+                    $('#tt').datagrid('deleteRow', getRowIndex(target));
+                }
+            });
+        }
+        function saverow(target){
+            $('#tt').datagrid('endEdit', getRowIndex(target));
+        }
+        function cancelrow(target){
+            $('#tt').datagrid('cancelEdit', getRowIndex(target));
+        }
+        function insert(){
+            var row = $('#tt').datagrid('getSelected');
+            if (row){
+                var index = $('#tt').datagrid('getRowIndex', row);
+            } else {
+                index = 0;
+            }
+            $('#tt').datagrid('insertRow', {
+                index: index,
+                row:{
+                    status:'P'
+                }
+            });
+            $('#tt').datagrid('selectRow',index);
+            $('#tt').datagrid('beginEdit',index);
+        }
+    </script>
+</head>
+<body>
+<div class="easyui-window" title="用户管理" icon="icon-help" style="width:1350px;height:700px;
+background: #fafafa;">
+<div id="permissions" class="easyui-layout" fit="true">
+    &lt;!&ndash;用户组信息&ndash;&gt;
+    <div region="west" split="true" style="width: 220px;">
+        <table id="usergroup" class="easyui-datagrid" style="width:200px;height:90%"
+               url=""
+               toolbar="#toolbar1"
+               fitColumns="true" singleSelect="true">
+            <thead>
+            <tr>
+                <th field="name1" width="60">编号</th>
+                <th field="name2" width="140" style="text-align: center">组名</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>1111111</td>
+                <td>fly</td>
+            </tr>
+            </tbody>
+        </table>
+        <div id="toolbar1" style="padding:5px;height:auto">
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true"
+               onclick="newUser1()">添加</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true"
+               onclick="editUser1()">编辑</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true"
+               onclick="destroyUser1()">删除</a>
+        </div>
+        <div id="dlg1" class="easyui-dialog" style="width:400px"
+             closed="true" buttons="#dlg1-buttons">
+            <form id="fm1" method="post" novalidate style="margin:0;padding:20px 50px">
+                <div style="margin-bottom:20px;font-size:14px;border-bottom:1px solid #ccc">用户组信息</div>
+                <div style="margin-bottom:10px">
+                    <input name="number" class="easyui-textbox" required="true" label="编号:" style="width:100%">
+                </div>
+                <div style="margin-bottom:10px">
+                    <input name="groupname" class="easyui-textbox" required="true" label="组名:" style="width:100%">
+                </div>
+            </form>
+        </div>
+        <div id="dlg1-buttons">
+            <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveUser1()"
+               style="width:90px">保存</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel"
+               onclick="javascript:$('#dlg1').dialog('close')" style="width:90px">取消</a>
+        </div>
+    </div>
+    &lt;!&ndash;右上侧权限列表&ndash;&gt;
+    <div region="center" border="false">
+        <div class="master" id="master">
+            <table>
+                <tr>
+                    <td rowspan="2"><select multiple="multiple" id="sel1">
+                        <option>a</option>
+                        <option>b</option>
+                        <option>c</option>
+                        <option>d</option>
+                        <option>e</option>
+                    </select>
+                    </td>
+                    <td>
+                        <table>
+                            <tr>
+                                <td><input type="button" value=">" onclick="toright();"></td>
+                            </tr>
+                            <tr>
+                                <td><input type="button" value="<" onclick="toleft();"></td>
+                            </tr>
+                            <tr>
+                                <td><input type="button" value=">>" onclick="allright();"></td>
+                            </tr>
+                            <tr>
+                                <td><input type="button" value="<<" onclick="allleft();"></td>
+                            </tr>
+                            <tr>
+                                <td><input type="button" value="确定"></td>
+                                <td><input type="button" value="取消"></td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td><select multiple="multiple" id="sel2">
+
+                    </select>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <table id="tt"  class="easyui-datagrid"
+               url=""
+               toolbar="#toolbar2" pagination="true"
+               rownumbers="true" fitColumns="true" singleSelect="true">
+        </table>
+        <div id="toolbar2">
+            <a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true"
+               onclick="insert()">添加</a>
+
+        </div>
+
+</body>
+</html>
