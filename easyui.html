@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="http://code.jquery.com/jquery-1.6.min.js"></script>
+    <script src="js/easyui/jquery.easyui.min.js"></script>
+    <link href="js/easyui/themes/default/easyui.css" rel="stylesheet" type="text/css">
+    <link href="js/easyui/themes/icon.css" rel="stylesheet" type="text/css">
+    <script src="js/easyui/locale/easyui-lang-zh_CN.js" type="text/javascript"></script>
+</head>
+<style type="text/css">
+    select {
+        width: 100px;
+        height: 200px;
+    }
+
+</style>
+<script>
+    var url;
+    function newUser1() {
+        $('#dlg1').dialog('open').dialog('center').dialog('setTitle', '创建用户组');
+        $('#fm1').form('clear');
+        url = '';
+    }
+    function editUser1() {
+        var row = $('#usergroup').datagrid('getSelected');
+        if (row == null)
+        {
+            $.messager.alert("系统提示", "请选择您要修改的数据！");
+            return;
+        }
+        if (row) {
+            $('#dlg1').dialog('open').dialog('center').dialog('setTitle', '编辑用户');
+            $('#fm1').form('load', row);
+            $('#fm1').val();
+            url = 'update_user.php?id=' + row.id;
+        }
+    }
+    function saveUser1() {
+        $('#fm1').form('submit', {
+            url: url,
+            onSubmit: function () {
+                return $(this).form('validate');
+            },
+            success: function (result) {
+                var result = eval('(' + result + ')');
+                if (result.errorMsg) {
+                    $.messager.show({
+                        title: 'Error',
+                        msg: result.errorMsg
+                    });
+                } else {
+                    $('#dlg1').dialog('close');        // close the dialog
+                    $('#usergroup').datagrid('reload');    // reload the user data
+                }
+            }
+        });
+    }
+    function destroyUser1() {
+        var row = $('#usergroup').datagrid('getSelected');
+        if (row == null)
+        {
+            $.messager.alert("系统提示", "请选择您要删除的数据！");
+            return;
+        }
+        if (row) {
+            $.messager.confirm('Confirm', 'Are you sure you want to destroy this user?', function (r) {
+                if (r) {
+                    $.post('destroy_user.php', {id: row.id}, function (result) {
+                        if (result.success) {
+                            $('#usergroup').datagrid('reload');    // reload the user data
+                        } else {
+                            $.messager.show({    // show error message
+                                title: 'Error',
+                                msg: result.errorMsg
+                            });
+                        }
+                    }, 'json');
+                }
+            });
+        }
+    }
+    function newUser2() {
+        $('#dlg2').dialog('open').dialog('center').dialog('setTitle', '创建用户');
+        $('#fm2').form('clear');
+        url = '';
+    }
+    function editUser2() {
+        var row = $('#userinfo').datagrid('getSelected');
+        if (row == null)
+        {
+            $.messager.alert("系统提示", "请选择您要修改的数据！");
+            return;
+        }
+        if (row) {
+            $('#dlg2').dialog('open').dialog('center').dialog('setTitle', '编辑用户');
+            $('#fm2').form('load', row);
+            url = 'update_user.php?id=' + row.id;
+        }
+    }
+    function saveUser2() {
+        $('#fm2').form('submit', {
+            url: url,
+            onSubmit: function () {
+                return $(this).form('validate');
+            },
+            success: function (result) {
+                var result = eval('(' + result + ')');
+                if (result.errorMsg) {
+                    $.messager.show({
+                        title: 'Error',
+                        msg: result.errorMsg
+                    });
+                } else {
+                    $('#dlg2').dialog('close');        // close the dialog
+                    $('#userinfo').datagrid('reload');    // reload the user data
+                }
+            }
+        });
+    }
+    function destroyUser2() {
+        var row = $('#userinfo').datagrid('getSelected');
+        if (row == null)
+        {
+            $.messager.alert("系统提示", "请选择您要删除的数据！");
+            return;
+        }
+        if (row) {
+            $.messager.confirm('Confirm', 'Are you sure you want to destroy this user?', function (r) {
+                if (r) {
+                    $.post('destroy_user.php', {id: row.id}, function (result) {
+                        if (result.success) {
+                            $('#userinfo').datagrid('reload');    // reload the user data
+                        } else {
+                            $.messager.show({    // show error message
+                                title: 'Error',
+                                msg: result.errorMsg
+                            });
+                        }
+                    }, 'json');
+                }
+            });
+        }
+    }
+
+    function toright() {
+        var sel1 = document.getElementById('sel1');
+        var sel2 = document.getElementById('sel2');
+        var sel1option = document.getElementsByTagName('option');
+        var len = sel1option.length;
+        for (var i = 0; i < len; i++) {
+            if (sel1.selectedIndex !== -1) {
+                sel2.appendChild(sel1option[sel1.selectedIndex]);
+            }
+        }
+    }
+
+    function toleft() {
+        var sel1 = document.getElementById('sel1');
+        var sel2 = document.getElementById('sel2');
+        var len = sel2.length;
+        for (var i = 0; i < len; i++) {
+            if (sel2.selectedIndex != -1) {
+                sel1.appendChild(sel2[sel2.selectedIndex]);
+            }
+        }
+    }
+
+    function allright() {
+        var sel1 = document.getElementById('sel1');
+        var sel2 = document.getElementById('sel2');
+        var sel1option = document.getElementsByTagName('option');
+        var len = sel1option.length;
+        for (i = 0; i < len; i++) {
+            sel2.appendChild(sel1option[0]);
+        }
+    }
+
+    function allleft() {
+        var sel1 = document.getElementById('sel1');
+        var sel2 = document.getElementById('sel2');
+        var len = sel2.length;
+        for (i = 0; i < len; i++) {
+            sel1.appendChild(sel2[0]);
+        }
+    }
+    $(document).ready(function () {
+        $('.master1').click(function () {
+            $('.master').show();
+            $('.user').hide();
+        });
+        $('.user1').click(function () {
+            $('.master').hide();
+            $('.user').show();
+        })
+        $('#user-table')
+
+    })
+
+</script>
+<body>
+<div class="easyui-window" title="用户管理" icon="icon-help" style="width:100%;height:700px;
+    background: #fafafa;">
+    <div id="permissions" class="easyui-layout" fit="true">
+        <!--用户组信息-->
+        <div region="west" split="true" style="width: 220px;">
+            <table id="usergroup" class="easyui-datagrid" style="width:200px;height:90%"
+                   url=""
+                   toolbar="#toolbar1"
+                   fitColumns="true" singleSelect="true">
+                <thead>
+                <tr>
+                    <th field="name1" width="60">编号</th>
+                    <th field="name2" width="140" style="text-align: center">组名</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>1111111</td>
+                    <td>fly</td>
+                </tr>
+                </tbody>
+            </table>
+            <div id="toolbar1" style="padding:5px;height:auto">
+                <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true"
+                   onclick="newUser1()">添加</a>
+                <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true"
+                   onclick="editUser1()">编辑</a>
+                <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true"
+                   onclick="destroyUser1()">删除</a>
+            </div>
+            <div id="dlg1" class="easyui-dialog" style="width:400px"
+                 closed="true" buttons="#dlg1-buttons">
+                <form id="fm1" method="post" novalidate style="margin:0;padding:20px 50px">
+                    <div style="margin-bottom:20px;font-size:14px;border-bottom:1px solid #ccc">用户组信息</div>
+                    <div style="margin-bottom:10px">
+                        <input name="number" class="easyui-textbox" required="true" label="编号:" style="width:100%">
+                    </div>
+                    <div style="margin-bottom:10px">
+                        <input name="groupname" class="easyui-textbox" required="true" label="组名:" style="width:100%">
+                    </div>
+                </form>
+            </div>
+            <div id="dlg1-buttons">
+                <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveUser1()"
+                   style="width:90px">保存</a>
+                <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel"
+                   onclick="javascript:$('#dlg1').dialog('close')" style="width:90px">取消</a>
+            </div>
+        </div>
+        <!--右上侧权限列表-->
+        <div region="center" border="false">
+            <div class="switch">
+                <input type="button" value="管理员" class="master1">
+                <input type="button" value="用户" class="user1">
+            </div>
+            <div class="master" id="master">
+                <table>
+                    <tr>
+                        <td rowspan="2"><select multiple="multiple" id="sel1">
+                            <option>a</option>
+                            <option>b</option>
+                            <option>c</option>
+                            <option>d</option>
+                            <option>e</option>
+                        </select>
+                        </td>
+                        <td>
+                            <table>
+                                <tr>
+                                    <td><input type="button" value=">" onclick="toright();"></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="button" value="<" onclick="toleft();"></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="button" value=">>" onclick="allright();"></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="button" value="<<" onclick="allleft();"></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="button" value="确定"></td>
+                                    <td><input type="button" value="取消"></td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td><select multiple="multiple" id="sel2">
+
+                        </select>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="user" style="display:none" id="user">
+                <table>
+                    <tr>
+                        <td rowspan="2"><select multiple="multiple" class="sel3">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
+                        </td>
+                        <td>
+                            <table>
+                                <tr>
+                                    <td><input type="button" value=">" onclick="toright();"></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="button" value="<" onclick="toleft();"></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="button" value=">>" onclick="allright();"></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="button" value="<<" onclick="allleft();"></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="button" value="确定"></td>
+                                    <td><input type="button" value="取消"></td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td><select multiple="multiple" class="sel4">
+
+                        </select>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <table id="userinfo" title="用户信息" class="easyui-datagrid" style="width:100%;height:400px"
+                   url=""
+                   toolbar="#toolbar2" pagination="true"
+                   rownumbers="true" fitColumns="true" singleSelect="true">
+                <thead>
+                <tr>
+                    <th field="usernumber" width="50">用户编号</th>
+                    <th field="username" width="50">用户名</th>
+                    <th field="password" width="50">密码</th>
+                    <th field="group" width="50">用户组别</th>
+                    <th field="tel" width="50">电话</th>
+                    <th field="machine" width="50">设备号</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>111</td>
+                    <td>111</td>
+                    <td>111</td>
+                    <td>1</td>
+                    <td>11111111</td>
+                    <td>11111</td>
+                </tr>
+                </tbody>
+            </table>
+            <div id="toolbar2">
+                <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true"
+                   onclick="newUser2()">添加</a>
+                <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true"
+                   onclick="editUser2()">编辑</a>
+                <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true"
+                   onclick="destroyUser2()">删除</a>
+            </div>
+            <!--弹出的用户信息编辑框-->
+            <div id="dlg2" class="easyui-dialog" style="width:400px" closed="true" buttons="#dlg2-buttons">
+                <form id="fm2" method="post" novalidate style="margin:0;padding:20px 50px">
+                    <div style="margin-bottom:20px;font-size:14px;border-bottom:1px solid #ccc">用户信息</div>
+                    <div style="margin-bottom:10px">
+                        <input name="usernumber" class="easyui-textbox" required="true" label="用户编号:"
+                               style="width:100%">
+                    </div>
+                    <div style="margin-bottom:10px">
+                        <input name="username" class="easyui-textbox" required="true" label="用户名:" style="width:100%">
+                    </div>
+                    <div style="margin-bottom:10px">
+                        <input name="password" class="easyui-textbox" required="true" label="密码:" style="width:100%">
+                    </div>
+                    <div style="margin-bottom:10px">
+                        <input name="group" class="easyui-textbox" required="true" label="用户组别:" style="width:100%">
+                    </div>
+                    <div style="margin-bottom:10px">
+                        <input name="tel" class="easyui-textbox" required="true" label="电话:" style="width:100%">
+                    </div>
+                    <div style="margin-bottom:10px">
+                        <input name="machine" class="easyui-textbox" required="true" label="设备号:" style="width:100%">
+                    </div>
+                </form>
+            </div>
+            <div id="dlg2-buttons">
+                <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveUser2()"
+                   style="width:90px">保存</a>
+                <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel"
+                   onclick="javascript:$('#dlg2').dialog('close')" style="width:90px">取消</a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>
