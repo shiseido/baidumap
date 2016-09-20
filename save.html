@@ -22,13 +22,6 @@
             {usergroupid:'1',name:'管理员'},
             {usergroupid:'2',name:'用户'},
         ];
-        /*用户权限*/
-        var userpre = [
-            {userpreid:'1',name:'a权限'},
-            {userpreid:'2',name:'b权限'},
-            {userpreid:'3',name:'c权限'},
-            {userpreid:'4',name:'d权限'},
-        ];
         $(function(){
             $('#tt').datagrid({
                 title:'用户信息表',
@@ -99,23 +92,6 @@
                 columns:[[
                     {field:'usergroupnumber',title:'组编号',width:60,editor:'text'},
                     {field:'usergroupname',title:'组名',width:100,editor:'text'},
-                    {field:'permission',title:'权限',width:150,
-                        formatter:function(value){
-                            for(var i=0; i<userpre.length; i++){
-                                if (userpre[i].userpreid == value) return userpre[i].name;
-                            }
-                            return value;
-                        },
-                        editor:{
-                            type:'combobox',
-                            options:{
-                                valueField:'userpreid',
-                                textField:'name',
-                                data:userpre,
-                                required:true
-                            }
-                        }
-                    },
                     {field:'action',title:'状态',width:80,align:'center',
                         formatter:function(value,row,index){
                             if (row.editing){
@@ -234,45 +210,39 @@
             $('#usergroup').datagrid('cancelEdit', getRowIndex(target));
         }
 
-        function toright() {
-            var sel1 = document.getElementById('sel1');
-            var sel2 = document.getElementById('sel2');
-            var sel1option = document.getElementsByTagName('option');
-            var len = sel1option.length;
-            for (var i = 0; i < len; i++) {
-                if (sel1.selectedIndex !== -1) {
-                    sel2.appendChild(sel1option[sel1.selectedIndex]);
+
+        function moveOption(e1, e2){
+            try{
+                for(var i=0;i<e1.options.length;i++){
+                    if(e1.options[i].selected){
+                        var e = e1.options[i];
+                        e2.options.add(new Option(e.text, e.value));
+                        e1.remove(i);
+                        ii=i-1
+                    }
+                }
+                document.myform.city.value=getvalue(document.myform.list2);
+            }
+            catch(e){}
+        }
+        function getvalue(geto){
+            var allvalue = "";
+            for(var i=0;i<geto.options.length;i++){
+                allvalue +=geto.options[i].value + ",";
+            }
+            return allvalue;
+        }
+        function changepos(obj,index)
+        {
+            if(index==-1){
+                if (obj.selectedIndex>0){
+                    obj.options(obj.selectedIndex).swapNode(obj.options(obj.selectedIndex-1))
                 }
             }
-        }
-
-        function toleft() {
-            var sel1 = document.getElementById('sel1');
-            var sel2 = document.getElementById('sel2');
-            var len = sel2.length;
-            for (var i = 0; i < len; i++) {
-                if (sel2.selectedIndex != -1) {
-                    sel1.appendChild(sel2[sel2.selectedIndex]);
+            else if(index==1){
+                if (obj.selectedIndex<obj.options.length-1){
+                    obj.options(obj.selectedIndex).swapNode(obj.options(obj.selectedIndex+1))
                 }
-            }
-        }
-
-        function allright() {
-            var sel1 = document.getElementById('sel1');
-            var sel2 = document.getElementById('sel2');
-            var sel1option = document.getElementsByTagName('option');
-            var len = sel1option.length;
-            for (i = 0; i < len; i++) {
-                sel2.appendChild(sel1option[0]);
-            }
-        }
-
-        function allleft() {
-            var sel1 = document.getElementById('sel1');
-            var sel2 = document.getElementById('sel2');
-            var len = sel2.length;
-            for (i = 0; i < len; i++) {
-                sel1.appendChild(sel2[0]);
             }
         }
     </script>
@@ -298,47 +268,38 @@ background: #fafafa;">
     </div>
     &lt;!&ndash;右上侧权限列表&ndash;&gt;
     <div region="center" border="false">
-        <div class="master" id="master">
-            <table>
-                <tr>
-                    <td rowspan="2"><select multiple="multiple" id="sel1">
-                        <option>a</option>
-                        <option>b</option>
-                        <option>c</option>
-                        <option>d</option>
-                        <option>e</option>
-                    </select>
-                    </td>
-                    <td>
-                        <table>
-                            <tr>
-                                <td><input type="button" value=">" onclick="toright();"></td>
-                            </tr>
-                            <tr>
-                                <td><input type="button" value="<" onclick="toleft();"></td>
-                            </tr>
-                            <tr>
-                                <td><input type="button" value=">>" onclick="allright();"></td>
-                            </tr>
-                            <tr>
-                                <td><input type="button" value="<<" onclick="allleft();"></td>
-                            </tr>
-                            <tr>
-                                <td><input type="button" value="确定"></td>
-                                <td><input type="button" value="取消"></td>
-                            </tr>
-                        </table>
-                    </td>
-                    <td><select multiple="multiple" id="sel2">
 
-                    </select>
+        <form method="post" name="myform">
+            <table border="0" width="300">
+                <tr>
+                    <td width="40%">
+                        <select style="WIDTH:100%" multiple name="list1" size="12" ondblclick="moveOption(document.myform.list1, document.myform.list2)">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
                     </td>
+                    <td width="20%" align="center">
+                        <input type="button" value="添加" onclick="moveOption(document.myform.list1, document.myform.list2)"><br/>
+                        <br/>
+                        <input type="button" value="删除" onclick="moveOption(document.myform.list2, document.myform.list1)">
+                    </td>
+                    <td width="40%">
+                        <select style="WIDTH:100%" multiple name="list2" size="12" ondblclick="moveOption(document.myform.list2, document.myform.list1)">
+                        </select>
+                    </td>
+
                 </tr>
             </table>
-        </div>
-        <div region="">
-
-        </div>
+            已有权限：<input type="text" name="city" size="40">
+        </form>
         <table id="tt"  class="easyui-datagrid"
                url=""
                toolbar="#toolbar2" pagination="true"
