@@ -1,16 +1,26 @@
 {
-  "total":28,
+  "total":19,
   "rows":[
-    {"productid":"36484b","mode":"OFF","lat":"31.482634,120.374382","ip":"223.104","port":"65386","time1":"08-17","time2":"08-18","interval":"2180","status":"离线","equip":"BMS","abnormal":"0000","user":"wxlb","Co":"无锡凌博"},
-  {"productid":"36484b","mode":"OFF","lat":"31.482634,120.374382","ip":"223.104","port":"65386","time1":"08-17","time2":"08-18","interval":"2180","status":"离线","equip":"BMS","abnormal":"0000","user":"wxlb","Co":"无锡凌博"},
-  {"productid":"36484b","mode":"OFF","lat":"31.482634,120.374382","ip":"223.104","port":"65386","time1":"08-17","time2":"08-18","interval":"2180","status":"离线","equip":"BMS","abnormal":"0000","user":"wxlb","Co":"无锡凌博"},
-  {"productid":"36484b","mode":"OFF","lat":"31.482634,120.374382","ip":"223.104","port":"65386","time1":"08-17","time2":"08-18","interval":"2180","status":"离线","equip":"BMS","abnormal":"0000","user":"wxlb","Co":"无锡凌博"},
-  {"productid":"36484b","mode":"OFF","lat":"31.482634,120.374382","ip":"223.104","port":"65386","time1":"08-17","time2":"08-18","interval":"2180","status":"离线","equip":"BMS","abnormal":"0000","user":"wxlb","Co":"无锡凌博"},
-  {"productid":"36484b","mode":"OFF","lat":"31.482634,120.374382","ip":"223.104","port":"65386","time1":"08-17","time2":"08-18","interval":"2180","status":"离线","equip":"BMS","abnormal":"0000","user":"wxlb","Co":"无锡凌博"},
-  {"productid":"36484b","mode":"OFF","lat":"31.482634,120.374382","ip":"223.104","port":"65386","time1":"08-17","time2":"08-18","interval":"2180","status":"离线","equip":"BMS","abnormal":"0000","user":"wxlb","Co":"无锡凌博"},
-  {"productid":"36484b","mode":"OFF","lat":"31.482634,120.374382","ip":"223.104","port":"65386","time1":"08-17","time2":"08-18","interval":"2180","status":"离线","equip":"BMS","abnormal":"0000","user":"wxlb","Co":"无锡凌博"},
-  {"productid":"36484b","mode":"OFF","lat":"31.482634,120.374382","ip":"223.104","port":"65386","time1":"08-17","time2":"08-18","interval":"2180","status":"离线","equip":"BMS","abnormal":"0000","user":"wxlb","Co":"无锡凌博"},
-  {"productid":"36484b","mode":"OFF","lat":"31.482634,120.374382","ip":"223.104","port":"65386","time1":"08-17","time2":"08-18","interval":"2180","status":"离线","equip":"BMS","abnormal":"0000","user":"wxlb","Co":"无锡凌博"}
+    {"productid":"36484b","mode":"OFF","lat":"120.374382,31.482634","ip":"223.104","port":"65386","time1":"08-17","time2":"08-18","interval":"2180","status":"离线","equip":"BMS","abnormal":"0000","user":"wxlb","Co":"无锡凌博"},
+  {"productid":"36484b","mode":"OFF","lat":"120.694374,31.308077","ip":"223.104","port":"65386","time1":"08-17","time2":"08-18","interval":"2180","status":"离线","equip":"BMS","abnormal":"0000","user":"wxlb","Co":"无锡凌博"},
+  {"productid":"36484b","mode":"OFF","lat":"120.55352,31.459009","ip":"223.104","port":"65386","time1":"08-17","time2":"08-18","interval":"2180","status":"离线","equip":"BMS","abnormal":"0000","user":"wxlb","Co":"无锡凌博"},
+  {"productid":"36484b","mode":"OFF","lat":"121.025525,31.418587","ip":"223.104","port":"65386","time1":"08-17","time2":"08-18","interval":"2180","status":"离线","equip":"BMS","abnormal":"0000","user":"wxlb","Co":"无锡凌博"},
+  {"productid":"36484b","mode":"OFF","lat":"120.728294,31.113874","ip":"223.104","port":"65386","time1":"08-17","time2":"08-18","interval":"2180","status":"离线","equip":"BMS","abnormal":"0000","user":"wxlb","Co":"无锡凌博"},
+  {"productid":"36484b","mode":"OFF","lat":"120.344825,30.385407","ip":"223.104","port":"65386","time1":"08-17","time2":"08-18","interval":"2180","status":"离线","equip":"BMS","abnormal":"0000","user":"wxlb","Co":"无锡凌博"},
+  {"productid":"36484b","mode":"OFF","lat":"121.485458,31.238941","ip":"223.104","port":"65386","time1":"08-17","time2":"08-18","interval":"2180","status":"离线","equip":"BMS","abnormal":"0000","user":"wxlb","Co":"无锡凌博"},
+  {"productid":"36484b","mode":"OFF","lat":"120.604687,31.859313","ip":"223.104","port":"65386","time1":"08-17","time2":"08-18","interval":"2180","status":"离线","equip":"BMS","abnormal":"0000","user":"wxlb","Co":"无锡凌博"},
+    {"productid":"36484b","mode":"OFF","lat":"120.604687,31.859313","ip":"223.104","port":"65386","time1":"08-17","time2":"08-18","interval":"2180","status":"离线","equip":"BMS","abnormal":"0000","user":"wxlb","Co":"无锡凌博"},
+    {"productid":"36484b","mode":"OFF","lat":"120.604687,31.859313","ip":"223.104","port":"65386","time1":"08-17","time2":"08-18","interval":"2180","status":"离线","equip":"BMS","abnormal":"0000","user":"wxlb","Co":"无锡凌博"},
+    {"productid":"36484b","mode":"OFF","lat":"120.604687,31.859313","ip":"223.104","port":"65386","time1":"08-17","time2":"08-18","interval":"2180","status":"离线","equip":"BMS","abnormal":"0000","user":"wxlb","Co":"无锡凌博"},
+    {"productid":"36484b","mode":"OFF","lat":"120.604687,31.859313","ip":"223.104","port":"65386","time1":"08-17","time2":"08-18","interval":"2180","status":"离线","equip":"BMS","abnormal":"0000","user":"wxlb","Co":"无锡凌博"},
+    {"productid":"36484b","mode":"OFF","lat":"120.604687,31.859313","ip":"223.104","port":"65386","time1":"08-17","time2":"08-18","interval":"2180","status":"离线","equip":"BMS","abnormal":"0000","user":"wxlb","Co":"无锡凌博"},
+    {"productid":"36484b","mode":"OFF","lat":"120.604687,31.859313","ip":"223.104","port":"65386","time1":"08-17","time2":"08-18","interval":"2180","status":"离线","equip":"BMS","abnormal":"0000","user":"wxlb","Co":"无锡凌博"},
+    {"productid":"36484b","mode":"OFF","lat":"120.604687,31.859313","ip":"223.104","port":"65386","time1":"08-17","time2":"08-18","interval":"2180","status":"离线","equip":"BMS","abnormal":"0000","user":"wxlb","Co":"无锡凌博"},
+    {"productid":"36484b","mode":"OFF","lat":"120.604687,31.859313","ip":"223.104","port":"65386","time1":"08-17","time2":"08-18","interval":"2180","status":"离线","equip":"BMS","abnormal":"0000","user":"wxlb","Co":"无锡凌博"},
+    {"productid":"36484b","mode":"OFF","lat":"120.604687,31.859313","ip":"223.104","port":"65386","time1":"08-17","time2":"08-18","interval":"2180","status":"离线","equip":"BMS","abnormal":"0000","user":"wxlb","Co":"无锡凌博"},
+    {"productid":"36484b","mode":"OFF","lat":"119.128304,32.074967","ip":"223.104","port":"65386","time1":"08-17","time2":"08-18","interval":"2180","status":"离线","equip":"BMS","abnormal":"0000","user":"wxlb","Co":"无锡凌博"},
+
+  {"productid":"36484b","mode":"OFF","lat":"120.009075,32.461851","ip":"223.104","port":"65386","time1":"08-17","time2":"08-18","interval":"2180","status":"离线","equip":"BMS","abnormal":"0000","user":"wxlb","Co":"无锡凌博"}
 ]
 
 }

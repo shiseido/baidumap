@@ -45,11 +45,11 @@
 
             points = [];
             for (var j = 0; j < ajson.rows.length; j++) {
-                var point = new BMap.Point(ajson.rows[j].lat.split(',')[1], ajson.rows[j].lat.split(',')[0]);
+                var point = new BMap.Point(ajson.rows[j].lat.split(',')[0], ajson.rows[j].lat.split(',')[1]);
                 map.centerAndZoom(point, 16);
                 map.addControl(new BMap.MapTypeControl());
-                var p1 = (ajson.rows[j].lat).split(',')[1];
-                var p2 = (ajson.rows[j].lat).split(',')[0];
+                var p1 = (ajson.rows[j].lat).split(',')[0];
+                var p2 = (ajson.rows[j].lat).split(',')[1];
                 points.push(new BMap.Point(p1, p2));
                 var infoWindow = new BMap.InfoWindow(ajson.rows[j].lat);
                 map.openInfoWindow(infoWindow,points[j]);
@@ -58,11 +58,11 @@
             }
 //            map.addOverlay(new BMap.Polyline(points, {strokeColor: "blue", strokeWeight: 3, strokeOpacity: 0.5}));
 
-            var m1 = new BMap.Icon("http://api.map.baidu.com/img/markers.png", new BMap.Size(23, 25), {
+          /*  var m1 = new BMap.Icon("http://api.map.baidu.com/img/markers.png", new BMap.Size(23, 25), {
                 offset: new BMap.Size(10, 25),
                 imageOffset: new BMap.Size(0, 0 - 0 * 25)
             });
-            map.addOverlay(new BMap.Marker(points[0], {icon: m1}));
+            map.addOverlay(new BMap.Marker(points[0], {icon: m1}));*/
             var mi = new BMap.Icon("http://api.map.baidu.com/img/markers.png", new BMap.Size(23, 25), {
                 offset: new BMap.Size(10, 25),
                 imageOffset: new BMap.Size(0, 0 - 1 * 25)
