@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <style type="text/css">html {
+        height: 100%
+    }
+
+    body {
+        height: 100%;
+        margin: 0px;
+        padding: 0px
+    }
+
+    #container {
+        height: 100%
+    }</style>
+    <script src="js/jquery-1.4.2.min.js"></script>
+    <script type="text/javascript"
+            src="http://api.map.baidu.com/api?v=2.0&ak=O1uMKSR3d1GHlmzxrMSvXbTWdRfrwUHR"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/library/CurveLine/1.5/src/CurveLine.min.js"></script>
+    <title>当前位置</title>
+</head>
+<body>
+<div id="container"></div>
+
+<script type="text/javascript">
+    var r = window.location.search;
+    if (r.indexOf("?") > -1) {
+        r = r.substring(r.indexOf("?") + 1, r.length);
+    }
+    $.ajax({
+        type: "Get",
+        url: "js/datagrid_data.json",
+        data: r,
+        dataType: "json",
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            alert(XMLHttpRequest.responseText);
+        },
+        success: function (ajson) {
+            var map = new BMap.Map("container");
+            map.enableScrollWheelZoom(true);
+
+            points = [];
+            for (var j = 0; j < ajson.rows.length; j++) {
+                var point = new BMap.Point(ajson.rows[j].lat.split(',')[1], ajson.rows[j].lat.split(',')[0]);
+                map.centerAndZoom(point, 16);
+                map.addControl(new BMap.MapTypeControl());
+                var p1 = (ajson.rows[j].lat).split(',')[1];
+                var p2 = (ajson.rows[j].lat).split(',')[0];
+                points.push(new BMap.Point(p1, p2));
+                var infoWindow = new BMap.InfoWindow(ajson.rows[j].lat);
+                map.openInfoWindow(infoWindow,points[j]);
+
+//                alert((ajson.rows[7].lat).split(',')[0])
+            }
+//            map.addOverlay(new BMap.Polyline(points, {strokeColor: "blue", strokeWeight: 3, strokeOpacity: 0.5}));
+
+            var m1 = new BMap.Icon("http://api.map.baidu.com/img/markers.png", new BMap.Size(23, 25), {
+                offset: new BMap.Size(10, 25),
+                imageOffset: new BMap.Size(0, 0 - 0 * 25)
+            });
+            map.addOverlay(new BMap.Marker(points[0], {icon: m1}));
+            var mi = new BMap.Icon("http://api.map.baidu.com/img/markers.png", new BMap.Size(23, 25), {
+                offset: new BMap.Size(10, 25),
+                imageOffset: new BMap.Size(0, 0 - 1 * 25)
+            });
+            map.addOverlay(new BMap.Marker(points[points.length - 1], {icon: mi}));
+            var top_left_control = new BMap.ScaleControl({anchor: BMAP_ANCHOR_TOP_LEFT});// 左上角，添加比例尺
+            var top_left_navigation = new BMap.NavigationControl();  //左上角，添加默认缩放平移控件
+            map.addControl(top_left_control);
+            map.addControl(top_left_navigation);
+        }
+    });
+
+</script>
+</body>
+</html>
