@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -13,16 +13,17 @@
     <script type="text/javascript">
         $(function(){
             $('#tt').datagrid({
-                title:'Editable DataGrid',
+                title:'设备管理器',
                 iconCls:'icon-edit',
-                width:1024,
-                height:768,
+                width:"100%",
+                height:"auto",
                 singleSelect:true,
                 idField:'',
+
                 url:'js/datagrid_data.json',
                 columns:[[
-                    {field:'productid',title:'设备ID',width:120,editor:'textbox'},
-                    {field:'mode',title:'模式',width:40,
+                    {field:'productid',title:'设备ID',width:"8%",editor:'textbox'},
+                    {field:'mode',title:'模式',width:"4%",
                         editor:{
                             type:'checkbox',
                             options:{
@@ -30,26 +31,14 @@
                                 off: 'OFF'
                             }
                         }
-                        /*editor:{
-                            type:'textbox',
-                            options:{
-                                valueField:'productid',
-                                textField:'name',
-                                data:products,
-                                required:true
-                            }
-                        }*/
-
                     },
-                   /* {field:'lat',title:'纬度',width:80,align:'right',editor:{type:'numberbox',options:{precision:6}}},
-                    {field:'lon',title:'经度',width:80,align:'right',editor:{type:'numberbox',options:{precision:6}}},*/
-                    {field:'ip',title:'IP地址',width:100,align:'right',editor:{type:'numberbox',options:{precision:6}}},
-                    {field:'port',title:'端口',width:80,align:'right',editor:{type:'numberbox',options:{precision:5}}},
-                    {field:'time1',title:'连接时间',width:100,align:'right',editor:{type:'numberbox',options:{precision:2}}},
-                    {field:'time2',title:'更新时间',width:100,align:'right',editor:{type:'numberbox',options:{precision:2}}},
-                    {field:'interval',title:'间隔',width:80,align:'right',editor:{type:'numberbox'}},
+                    {field:'ip',title:'IP地址',width:"8%",align:'right',editor:{type:'numberbox',options:{precision:6}}},
+                    {field:'port',title:'端口',width:"8%",align:'right',editor:{type:'numberbox',options:{precision:5}}},
+                    {field:'time1',title:'连接时间',width:"8%",align:'right',editor:{type:'numberbox',options:{precision:2}}},
+                    {field:'time2',title:'更新时间',width:"8%",align:'right',editor:{type:'numberbox',options:{precision:2}}},
+                    {field:'interval',title:'间隔',width:"8%",align:'right',editor:{type:'numberbox'}},
                     {
-                        field: 'status', title: '状态', width: 40,
+                        field: 'status', title: '状态', width: "4%",
                         editor: {
                             type: 'checkbox',
                             options: {
@@ -58,11 +47,11 @@
                             }
                         }
                     },
-                    {field:'equip',title:'设备信息',width:80,editor:'textbox'},
-                    {field:'abnormal',title:'异常码',width:80,editor:'numberbox'},
-                    {field:'user',title:'用户',width:80,editor:'textbox'},
-                    {field:'Co',title:'公司',width:100,editor:'textbox'},
-                    {field:'action',title:'操作',width:80,align:'center',
+                    {field:'equip',title:'设备信息',width:"8%",editor:'textbox'},
+                    {field:'abnormal',title:'异常码',width:"8%",editor:'numberbox'},
+                    {field:'user',title:'用户',width:"8%",editor:'textbox'},
+                    {field:'Co',title:'公司',width:"8%",editor:'textbox'},
+                    {field:'action',title:'操作',width:"4%",align:'center',
                         formatter:function(value,row,index){
                             if (row.editing){
                                 var s = '<a href="#" onclick="saverow(this)">保存</a> ';
@@ -75,7 +64,7 @@
                             }
                         }
                     },
-                    {field:'shoemap',title:'地图',align:'center',width:80,
+                    {field:'shoemap',title:'地图',align:'center',width:"8%",
                         formatter:function(value, rec){
                             var btn = '<input type="button" class="editcls" onclick="showIframe()" value="查看"></in>';
                             return btn;
@@ -95,6 +84,7 @@
                 }
             });
         });
+
         function updateActions(index){
             $('#tt').datagrid('updateRow',{
                 index: index,
@@ -148,7 +138,6 @@
             //添加iframe
             var if_w = w;
             var if_h = h;
-            //allowTransparency='true' 设置背景透明
             $("<iframe src='map.html' width='660' height='480' id='YuFrame1' name='YuFrame1' style='position:absolute;z-index:4;'  frameborder='no' marginheight='0' marginwidth='0' allowTransparency='true'></iframe>").prependTo('body');
             var st=document.documentElement.scrollTop|| document.body.scrollTop;//滚动条距顶部的距离
             var sl=document.documentElement.scrollLeft|| document.body.scrollLeft;//滚动条距左边的距离
@@ -176,31 +165,66 @@
             });
         }
         function refresh(){
-         location.reload();
-         }
+            location.reload();
+        }
     </script>
 </head>
 <body>
 <h2>设备管理器</h2>
-<div style="margin:10px 0;display: inline">
-    <a href="#" class="easyui-linkbutton" onclick="insert()">添加设备</a>
-</div>
-<div style="margin:10px 0;display: inline">
-    <a href="#" class="easyui-linkbutton" onclick="refresh()">刷新</a>
-</div>
-
 <div id="tb" style="padding:3px">
     <span>设备ID:</span>
     <input id="itemid" style="line-height:26px;border:1px solid #ccc">
     <span>端口:</span>
     <input id="productid" style="line-height:26px;border:1px solid #ccc">
     <a href="#" class="easyui-linkbutton" plain="true" onclick="doSearch()">查询</a>
+    <a href="#" class="easyui-linkbutton" plain="true" onclick="insert()">添加设备</a>
+    <a href="#" class="easyui-linkbutton" plain="true" onclick="refresh()">刷新</a>
 </div>
-<table id="tt" class="easyui-datagrid" style="width:700px;height:250px"
+<table id="tt" class="easyui-datagrid"
        url="js/datagrid24_getdata.php"
        title="Searching" iconCls="icon-search" toolbar="#tb"
        rownumbers="true" pagination="true">
 </table>
+<script>
+    function getData(){
+        var rows = [];
+        for(var i=1; i<=800; i++){
+            rows.push({
+            });
+        }
+        return rows;
+    }
 
+    function pagerFilter(data){
+        if (typeof data.length == 'number' && typeof data.splice == 'function'){	// is array
+            data = {
+                total: data.length,
+                rows: data
+            }
+        }
+        var dg = $(this);
+        var opts = dg.datagrid('options');
+        var p = $('#tt').datagrid('getPager');
+        $(p).pagination({
+            pageSize: 10,
+            pageList: [10, 20, 30],
+            beforePageText: '第',
+            afterPageText: '页    共 {pages} 页',
+            displayMsg: '当前显示 {from}-{to} 条记录,共 {total} 条记录'
+        });
+        if (!data.originalRows){
+            data.originalRows = (data.rows);
+        }
+        var start = (opts.pageNumber-1)*parseInt(opts.pageSize);
+        var end = start + parseInt(opts.pageSize);
+        data.rows = (data.originalRows.slice(start, end));
+        return data;
+    }
+
+    $(function(){
+        $('#tt').datagrid({loadFilter:pagerFilter}).datagrid('loadData', getData());
+    });
+</script>
 </body>
 </html>
+
