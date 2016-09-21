@@ -8,13 +8,7 @@
     <link rel="stylesheet" type="text/css" href="css/demo.css">
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/jquery.easyui.min.js"></script>
-    <style type="text/css">
-        td {
-            word-wrap: break-word;
-            word-break: break-all;
-            white-space: normal;
-        }
-    </style>
+
 </head>
 <body>
 <h2>接口文档说明</h2>
@@ -28,7 +22,7 @@
             <tr>
                 <th field="name1" width="33%">错误代码</th>
                 <th field="name2" width="33%">数据类型</th>
-                <th field="name3" width="33%">数据类型</th>
+                <th field="name3" width="33%">错误原因</th>
             </tr>
             </thead>
             <tbody>
@@ -65,9 +59,10 @@
             <thead>
             <tr>
                 <th field="name1" width="10%">指令</th>
-                <th field="name2" width="20%">功能</th>
-                <th field="name3" width="35%">所需数据</th>
+                <th field="name2" width="10%">功能</th>
+                <th field="name3" width="20%">所需数据</th>
                 <th field="name4" width="35%">拓展</th>
+                <th field="name5" width="25%">说明</th>
             </tr>
             </thead>
             <tbody>
@@ -79,6 +74,7 @@
                     '{"status":0, "info":"ok","access_token":"%s","UserID":%d,"CompanyID":%d,"UserName":"%s",
                     <br>"phone":"%s","companyName":"%s","DeviceID":"%s","modules":%s}
                 </td>
+                <td>根据输入的用户名，密码，app版本和设备信息用于登录设备</td>
             </tr>
             <tr>
                 <td>&32</td>
@@ -87,6 +83,7 @@
                 <td>'{"status":101, "info":"未找到该用户"}'<br>
                     {"status":0, "info":"ok","access_token":"%s"}
                 </td>
+                <td>根据输入的用户名将用户从系统中抹除</td>
             </tr>
             <tr>
                 <td>&33</td>
@@ -101,6 +98,7 @@
                     {"status":0, "info":"ok","access_token":"%s","UserID":%d,"CompanyID":%d,"UserName":"%s",
                     <br>"phone":"%s","companyName":"%s","DeviceID":"%s","modules":%s}
                 </td>
+                <td>根据输入的用户名，密码，app版本，手机号码和设备信息用于注册新的用户</td>
             </tr>
             <tr>
                 <td>&34</td>
@@ -114,6 +112,7 @@
                     {"status":107, "info":"请不要重复捆绑相同设备"}<br>
                     {"status":0, "info":"ok"}
                 </td>
+                <td>根据输入的账号和设备信息用于给当前用户增加一个设备</td>
             </tr>
             <tr>
                 <td>&35</td>
@@ -127,12 +126,14 @@
                     {"status":0, "info":"ok"}<br>
                     {"status":101, "info":"未找到该用户"}
                 </td>
+                <td>根据输入的账号和设备信息用于给当前用户更换一个设备</td>
             </tr>
             <tr>
                 <td>&36</td>
                 <td> 取得用户的设备列表</td>
                 <td>UserID</td>
                 <td> {"status":0, "info":"ok","DeviceList":[]}</td>
+                <td>根据用户帐号查询用户已有的设备信息</td>
             </tr>
             <tr>
                 <td>&37</td>
@@ -143,6 +144,7 @@
                 <td> {"status":101, "info":"未找到该用户"}<br>
                     {"status":0, "info":"ok"}
                 </td>
+                <td>根据输入的账号和设备信息用于给当前用户激活一个设备</td>
             </tr>
             <tr>
                 <td>&38</td>
@@ -153,6 +155,7 @@
                 </td>
                 <td>{"status":0, "info":"ok","error":[],"states":[]}
                 </td>
+                <td>根据输入的设备信息和开始结束时间查询该设备在该时间点内的活动信息</td>
             </tr>
             <tr>
                 <td>&40</td>
@@ -161,6 +164,7 @@
                 </td>
                 <td>
                 </td>
+                <td>查询数据库</td>
             </tr>
             <tr>
                 <td>&41</td>
@@ -169,6 +173,7 @@
                 </td>
                 <td>
                 </td>
+                <td>运行数据库</td>
             </tr>
             <tr>
                 <td>&50</td>
@@ -180,6 +185,7 @@
                 </td>
                 <td>{"status":0, "info":"ok","rowcount":0,"dataset":{}}
                 </td>
+                <td>根据输入的设备信息，开始结束时间和需要查询的次数返回该设备在该时间点内的路径</td>
             </tr>
             <tr>
                 <td>&51</td>
@@ -190,6 +196,7 @@
                 <td>{"status":0, "info":"ok","Result":}<br>
                     {"status":1, "info":"SMS Error","Result":}
                 </td>
+                <td>根据输入的手机号码，向其发送验证信息</td>
             </tr>
             <tr>
                 <td>&52</td>
@@ -201,9 +208,10 @@
                     {"status":0, "info":"ok","path": <span style="color: #4bb1cf">http://www.beelinker.net/gpsimage/</span> }<br>
                     {"status":130, "info":"图片不存在","path":""}
                 </td>
+                <td>根据选择的图片名称和类型，向其发送一个二维码</td>
             </tr>
             <tr>
-                <td rowspan="3">&53</td>
+                <td>&53</td>
                 <td>获取模块系统信息</td>
                 <td>SystemName<br>
                     SystemOS<br>
@@ -215,6 +223,7 @@
                     "ScrollImg":[ {"Address":" ","FileDate":"' ","FileSize": ,"cmd":" "} ]}<br>
                     <span style="color: #4bb1cf">http://www.beelinker.net/api/GetActiveDevice.json</span>
                 </td>
+                <td>根据操作系统和版本号，获取当前模块的系统信息并以json形式返回</td>
             </tr>
             <tr>
                 <td>&53</td>
@@ -227,6 +236,7 @@
                     <span style="color: #4bb1cf">http://www.beelinker.net/api/GetCoords.json</span><br>
                     返回设备位置动态网页
                 </td>
+                <td>已动态网页或者json数据的形式返回当前设备的状态信息</td>
             </tr>
             <tr>
                 <td>&53</td>
@@ -240,6 +250,7 @@
                     {"scale": 16, "center": "120.281172,31.480517"，"coords": []}<br>
                     <span style="color: #4bb1cf">http://www.beelinker.net/api/COORD.HTML</span>
                 </td>
+                <td>根据输入的设备信息，开始结束时间和需要查询的次数以json数据的形式返回该设备在该时间点内的坐标点</td>
             </tr>
             </tbody>
         </table>
