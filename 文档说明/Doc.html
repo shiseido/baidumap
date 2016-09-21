@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>接口文档</title>
+    <link rel="stylesheet" type="text/css" href="css/easyui.css">
+    <link rel="stylesheet" type="text/css" href="css/icon.css">
+    <link rel="stylesheet" type="text/css" href="css/demo.css">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/jquery.easyui.min.js"></script>
+
+</head>
+<body>
+<h2>接口文档说明</h2>
+
+<div style="margin:20px 0 10px 0;"></div>
+<div class="easyui-accordion" style="width:100%;height:auto;">
+    <div title="概述" data-options="iconCls:'icon-ok'" style="overflow:auto;padding:10px;">
+        <h3 style="color:#0099FF;">错误类型</h3>
+        <table id="tt" class="easyui-datagrid" style="width:100%;height:auto;">
+            <thead>
+            <tr>
+                <th field="name1" width="33%">错误代码</th>
+                <th field="name2" width="33%">数据类型</th>
+                <th field="name3" width="33%">错误原因</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>"status":1</td>
+                <td>info</td>
+                <td>JSON格式无法识别</td>
+
+            </tr>
+            <tr>
+                <td>"status":2</td>
+                <td>info</td>
+                <td>未知错误%s</td>
+
+            </tr>
+            <tr>
+                <td>"status":3</td>
+                <td>info</td>
+                <td>参数错误</td>
+
+            </tr>
+            <tr>
+                <td>"status":4</td>
+                <td>info</td>
+                <td>无效会话号</td>
+
+            </tr>
+            </tbody>
+        </table>
+        <h3 style="color:#0099FF;">status为"0"时返回正确</h3>
+    </div>
+    <div title="命令指南" data-options="iconCls:'icon-ok'" style="padding:10px;">
+        <table id="tt" class="easyui-datagrid" style="width:100%;height:auto;">
+            <thead>
+            <tr>
+                <th field="name1" width="10%">指令</th>
+                <th field="name2" width="10%">功能</th>
+                <th field="name3" width="20%">所需数据</th>
+                <th field="name4" width="35%">拓展</th>
+                <th field="name5" width="25%">说明</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>Cmd=&31</td>
+                <td>用户登录</td>
+                <td>UserName<br>Password<br>AppVersion<br>ARD_1.1.1.2<br>GMS_1.2.3</td>
+                <td> '{"status":100, "info":"用户或者密码错误"}'<br>
+                    '{"status":0, "info":"ok","access_token":"%s","UserID":%d,"CompanyID":%d,"UserName":"%s",
+                    <br>"phone":"%s","companyName":"%s","DeviceID":"%s","modules":%s}
+                </td>
+                <td>根据输入的用户名，密码，app版本和设备信息用于登录设备</td>
+            </tr>
+            <tr>
+                <td>&32</td>
+                <td> 用户注销</td>
+                <td>UserName</td>
+                <td>'{"status":101, "info":"未找到该用户"}'<br>
+                    {"status":0, "info":"ok","access_token":"%s"}
+                </td>
+                <td>根据输入的用户名将用户从系统中抹除</td>
+            </tr>
+            <tr>
+                <td>&33</td>
+                <td>注册用户</td>
+                <td> UserName<br>Password<br>phone <br>DeviceID
+                    {"status":103, "info":"设备号码错误"}<br>
+                    {"status":104, "info":"在[%d]公司未找到号码[%s]设备"}<br>
+                    AppVersion
+                </td>
+                <td>{"status":105, "info":"该设备已经被其他用户捆绑"}<br>
+                    {"status":106, "info":"用户已经存在"}<br>
+                    {"status":0, "info":"ok","access_token":"%s","UserID":%d,"CompanyID":%d,"UserName":"%s",
+                    <br>"phone":"%s","companyName":"%s","DeviceID":"%s","modules":%s}
+                </td>
+                <td>根据输入的用户名，密码，app版本，手机号码和设备信息用于注册新的用户</td>
+            </tr>
+            <tr>
+                <td>&34</td>
+                <td> 用户增加设备</td>
+                <td> UserID<br>
+                    DeviceID
+                </td>
+                <td> {"status":103, "info":"设备号码错误"}<br>
+                    {"status":104, "info":"在[%d]公司未找到号码[%s]设备"}<br>
+                    '{"status":105, "info":"该设备已经被其他用户捆绑"}'<br>
+                    {"status":107, "info":"请不要重复捆绑相同设备"}<br>
+                    {"status":0, "info":"ok"}
+                </td>
+                <td>根据输入的账号和设备信息用于给当前用户增加一个设备</td>
+            </tr>
+            <tr>
+                <td>&35</td>
+                <td> 设备更换用户</td>
+                <td> UserID <br>
+                    DeviceID
+                </td>
+                <td> {"status":103, "info":"设备号码错误"}<br>
+                    {"status":104, "info":"在[%d]公司未找到号码[%s]设备"}<br>
+                    {"status":121, "info":"当前设备已经属于该用户"}<br>
+                    {"status":0, "info":"ok"}<br>
+                    {"status":101, "info":"未找到该用户"}
+                </td>
+                <td>根据输入的账号和设备信息用于给当前用户更换一个设备</td>
+            </tr>
+            <tr>
+                <td>&36</td>
+                <td> 取得用户的设备列表</td>
+                <td>UserID</td>
+                <td> {"status":0, "info":"ok","DeviceList":[]}</td>
+                <td>根据用户帐号查询用户已有的设备信息</td>
+            </tr>
+            <tr>
+                <td>&37</td>
+                <td>用户激活设备</td>
+                <td> UserID<br>
+                    DeviceID
+                </td>
+                <td> {"status":101, "info":"未找到该用户"}<br>
+                    {"status":0, "info":"ok"}
+                </td>
+                <td>根据输入的账号和设备信息用于给当前用户激活一个设备</td>
+            </tr>
+            <tr>
+                <td>&38</td>
+                <td> 查询设备一段时间的信息</td>
+                <td> DeviceID<br>
+                    fromDatetime<br>
+                    toDateTime
+                </td>
+                <td>{"status":0, "info":"ok","error":[],"states":[]}
+                </td>
+                <td>根据输入的设备信息和开始结束时间查询该设备在该时间点内的活动信息</td>
+            </tr>
+            <tr>
+                <td>&40</td>
+                <td> 直接查询SQL</td>
+                <td>sql
+                </td>
+                <td>
+                </td>
+                <td>查询数据库</td>
+            </tr>
+            <tr>
+                <td>&41</td>
+                <td>运行SQL</td>
+                <td>
+                </td>
+                <td>
+                </td>
+                <td>运行数据库</td>
+            </tr>
+            <tr>
+                <td>&50</td>
+                <td>查询设备的位置信息</td>
+                <td>DeviceID<br>
+                    fromDatetime<br>
+                    toDateTime<br>
+                    iCount<br>
+                </td>
+                <td>{"status":0, "info":"ok","rowcount":0,"dataset":{}}
+                </td>
+                <td>根据输入的设备信息，开始结束时间和需要查询的次数返回该设备在该时间点内的路径</td>
+            </tr>
+            <tr>
+                <td>&51</td>
+                <td>发送短信</td>
+                <td>PhotoNo<br>
+                    Memo
+                </td>
+                <td>{"status":0, "info":"ok","Result":}<br>
+                    {"status":1, "info":"SMS Error","Result":}
+                </td>
+                <td>根据输入的手机号码，向其发送验证信息</td>
+            </tr>
+            <tr>
+                <td>&52</td>
+                <td>取图片</td>
+                <td>imageID<br>
+                    imageType
+                </td>
+                <td>设备二维码图片 imageID为设备编号<br>
+                    {"status":0, "info":"ok","path": <span style="color: #4bb1cf">http://www.beelinker.net/gpsimage/</span> }<br>
+                    {"status":130, "info":"图片不存在","path":""}
+                </td>
+                <td>根据选择的图片名称和类型，向其发送一个二维码</td>
+            </tr>
+            <tr>
+                <td>&53</td>
+                <td>获取模块系统信息</td>
+                <td>SystemName<br>
+                    SystemOS<br>
+                    Version
+                </td>
+                <td> {"status":0, "info":"ok" ,<br>
+                    "Version":{"VersionID":" ","Address":" ","ReleaseDate":" ","ReleaseInfo":" "} ,<br>
+                    "splash_image":{"Address":" ","FileDate":" ","FileSize": } ,<br>
+                    "ScrollImg":[ {"Address":" ","FileDate":"' ","FileSize": ,"cmd":" "} ]}<br>
+                    <span style="color: #4bb1cf">http://www.beelinker.net/api/GetActiveDevice.json</span>
+                </td>
+                <td>根据操作系统和版本号，获取当前模块的系统信息并以json形式返回</td>
+            </tr>
+            <tr>
+                <td>&53</td>
+                <td>当前设备状态</td>
+                <td></td>
+                <td> {"Count":1,
+                    "socket":[{"time":"2016-09-21 10:35:35:212","IP":"117.136.19.105",<br>
+                    "port":44979,"ID":"00ac9f60ac82303c5f","Coord":"31.273128:120.740208:0",<br>
+                    "lastCmdTime":"2016-09-21 11:51:58:759"}]}<br>
+                    <span style="color: #4bb1cf">http://www.beelinker.net/api/GetCoords.json</span><br>
+                    返回设备位置动态网页
+                </td>
+                <td>已动态网页或者json数据的形式返回当前设备的状态信息</td>
+            </tr>
+            <tr>
+                <td>&53</td>
+                <td>查询设备位置坐标</td>
+                <td>DeviceID<br>
+                    fromDatetime<br>
+                    toDateTime<br>
+                    iCount
+                </td>
+                <td> type
+                    {"scale": 16, "center": "120.281172,31.480517"，"coords": []}<br>
+                    <span style="color: #4bb1cf">http://www.beelinker.net/api/COORD.HTML</span>
+                </td>
+                <td>根据输入的设备信息，开始结束时间和需要查询的次数以json数据的形式返回该设备在该时间点内的坐标点</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
