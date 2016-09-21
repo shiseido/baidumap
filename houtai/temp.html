@@ -26,7 +26,7 @@
                 selectFn();
                 $(d.select).change(function(){
                     selectFn();
-                })
+                });
                 function selectFn(){
                     var selectedIndex = $(d.select).find('option:selected').attr('i'); //保存被选中的option的属性i的值
                     $(d.con).eq(selectedIndex).show().siblings(d.con).hide();       //显示对应显示的对象
