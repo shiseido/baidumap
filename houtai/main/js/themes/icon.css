@@ -43,3 +43,27 @@
 .icon-back{
 	background:url('icons/back.png') no-repeat;
 }
+.icon-password{
+	background:url('icons/lock.png') no-repeat;
+}
+.icon-chart{
+	background:url('icons/chart.png') no-repeat;
+}
+.icon-shape{
+	background:url('icons/shape.png') no-repeat;
+}
+.icon-locate{
+	background:url('icons/locate.png') no-repeat;
+}
+.icon-search{
+	background:url('icons/search.png') no-repeat;
+}
+.icon-warn{
+	background:url('icons/warn.png') no-repeat;
+}
+.icon-setting{
+	background:url('icons/setting.png') no-repeat;
+}
+.icon-vehicle{
+	background:url('icons/vehicle.png') no-repeat;
+}
