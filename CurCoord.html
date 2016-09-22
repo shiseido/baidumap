@@ -52,10 +52,14 @@
             }
             map.addOverlay(new BMap.Polyline(points, {strokeColor: "blue", strokeWeight: 3, strokeOpacity: 0.5}));
             if (points.length > 0) {
-                var m1 = new BMap.Icon("image/stop.png", new BMap.Size(50, 50));
+                var m1 = new BMap.Icon("image/start.png", new BMap.Size(50, 50) ,{
+                    offset: new BMap.Size(50, 25)
+                });
                 map.addOverlay(new BMap.Marker(points[0], {icon: m1}));
                 if (points.length > 1) {
-                    var mi = new BMap.Icon("image/start.png", new BMap.Size(50, 50));
+                    var mi = new BMap.Icon("image/stop.png", new BMap.Size(50, 50) ,{
+                        offset: new BMap.Size(50, 25)
+                    });
                     map.addOverlay(new BMap.Marker(points[points.length - 1], {icon: mi}));
                 }
             }
