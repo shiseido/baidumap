@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="keywords" content="jquery,ui,easy,easyui,web">
+    <meta name="description" content="easyui help you build your web page easily!">
+    <title>设备ID</title>
+    <link rel="stylesheet" type="text/css" href="themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="css/demo.css">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/jquery.easyui.min.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            $('#tt').datagrid({
+                title:'用户管理',
+                iconCls:'icon-edit',
+                width:"100%",
+                height:"auto",
+                singleSelect:true,
+                idField:'',
+                url:'js/Class.json',
+                columns:[[
+                    {field:'id',title:'编号',width:"20%",editor:'textbox'},
+
+                    {field:'class',title:'组名',width:"30%",editor:'textbox'},
+
+                    {field:'action',title:'操作',width:"50%",align:'center',
+                        formatter:function(value,row,index){
+                            if (row.editing){
+                                var s = '<a href="#" onclick="saverow(this)">保存</a> ';
+                                var c = '<a href="#" onclick="cancelrow(this)">取消</a>';
+                                return s+c;
+                            } else {
+                                var e = '<a href="#" onclick="editrow(this)">编辑</a> ';
+                                var d = '<a href="#" onclick="deleterow(this)">删除</a>';
+                                return e+d;
+                            }
+                        }
+                    }
+
+                ]],
+                onBeforeEdit:function(index,row){
+                    row.editing = true;
+                    updateActions(index);
+                },
+                onAfterEdit:function(index,row){
+                    row.editing = false;
+                    updateActions(index);
+                },
+                onCancelEdit:function(index,row){
+                    row.editing = false;
+                    updateActions(index);
+                }
+            });
+        });
+
+        function updateActions(index){
+            $('#tt').datagrid('updateRow',{
+                index: index,
+                row:{}
+            });
+        }
+        function getRowIndex(target){
+            var tr = $(target).closest('tr.datagrid-row');
+            return parseInt(tr.attr('datagrid-row-index'));
+        }
+        function editrow(target){
+            $('#tt').datagrid('beginEdit', getRowIndex(target));
+        }
+        function deleterow(target){
+            $.messager.confirm('确认','确定修改?',function(r){
+                if (r){
+                    $('#tt').datagrid('deleteRow', getRowIndex(target));
+                }
+            });
+        }
+
+        function saverow(target){
+            $('#tt').datagrid('endEdit', getRowIndex(target));
+        }
+        function cancelrow(target){
+            $('#tt').datagrid('cancelEdit', getRowIndex(target));
+        }
+        function insert(){
+            var row = $('#tt').datagrid('getSelected');
+            if (row){
+                var index = $('#tt').datagrid('getRowIndex', row);
+            } else {
+                index = 0;
+            }
+            $('#tt').datagrid('insertRow', {
+                index: index,
+                row:{
+                    status:'p'
+                }
+            });
+
+            $('#tt').datagrid('selectRow',index);
+            $('#tt').datagrid('beginEdit',index);
+        }
+        $(function(){
+            $('#dg').datagrid({
+                title:'用户管理',
+                iconCls:'icon-edit',
+                width:"100%",
+                height:"auto",
+                singleSelect:true,
+                idField:'',
+                url:'js/guanli.json',
+                columns:[[
+                    {field:'id',title:'编号',width:"5%",editor:'textbox'},
+                    {field:'name',title:'用户名',width:"15%",editor:'textbox'},
+                    {field:'password',title:'密码',width:"15%",editor:'textbox'},
+                    {field:'class',title:'组名',width:"15%",editor:'textbox'},
+                    {field:'phone',title:'电话',width:"15%",editor:'numberbox'},
+                    {field:'device',title:'设备号',width:"15%",editor:'textbox'},
+                    {field:'action',title:'操作',width:"20%",align:'center',
+                        formatter:function(value,row,index){
+                            if (row.editing){
+                                var s = '<a href="#" onclick="saverow1(this)">保存</a> ';
+                                var c = '<a href="#" onclick="cancelrow1(this)">取消</a>';
+                                return s+c;
+                            } else {
+                                var e = '<a href="#" onclick="editrow1(this)">编辑</a> ';
+                                var d = '<a href="#" onclick="deleterow1(this)">删除</a>';
+                                return e+d;
+                            }
+                        }
+                    }
+
+                ]],
+                onBeforeEdit:function(index,row){
+                    row.editing = true;
+                    updateActions(index);
+                },
+                onAfterEdit:function(index,row){
+                    row.editing = false;
+                    updateActions(index);
+                },
+                onCancelEdit:function(index,row){
+                    row.editing = false;
+                    updateActions(index);
+                }
+            });
+        });
+
+        function updateActions1(index){
+            $('#dg').datagrid('updateRow',{
+                index: index,
+                row:{}
+            });
+        }
+        function getRowIndex1(target){
+            var tr = $(target).closest('tr.datagrid-row');
+            return parseInt(tr.attr('datagrid-row-index'));
+        }
+        function editrow1(target){
+            $('#dg').datagrid('beginEdit', getRowIndex(target));
+        }
+        function deleterow1(target){
+            $.messager.confirm('确认','确定修改?',function(r){
+                if (r){
+                    $('#dg').datagrid('deleteRow', getRowIndex(target));
+                }
+            });
+        }
+
+        function saverow1(target){
+            $('#dg').datagrid('endEdit', getRowIndex(target));
+        }
+        function cancelrow1(target){
+            $('#dg').datagrid('cancelEdit', getRowIndex(target));
+        }
+        function insert1(){
+            var row = $('#dg').datagrid('getSelected');
+            if (row){
+                var index = $('#dg').datagrid('getRowIndex', row);
+            } else {
+                index = 0;
+            }
+            $('#dg').datagrid('insertRow', {
+                index: index,
+                row:{
+                    status:'p'
+                }
+            });
+
+            $('#dg').datagrid('selectRow',index);
+            $('#dg').datagrid('beginEdit',index);
+        }
+
+    </script>
+</head>
+<body>
+
+<div id="tb" style="padding:3px">
+    <a href="#" class="easyui-linkbutton" plain="true" onclick="insert()">添加用户组</a>
+</div>
+<div id="tc" style="padding:3px">
+    <a href="#" class="easyui-linkbutton" plain="true" onclick="insert1()">添加用户</a>
+</div>
+<div style="width: 38%;height: 100%;border: 1px solid black;position: absolute;background-color: #c4e3f3">
+    <table id="tt" class="easyui-datagrid"
+            title="Searching" iconCls="icon-search" toolbar="#tb"
+            rownumbers="true" >
+
+    </table>
+</div>
+<div style="width: 60%;height: 40%;border: 1px solid black;position: absolute;right: 0;background-color: #c4e3f3">
+<div style="width: 30%;height: 100%;border: 1px solid black;display: inline-block;float: left">
+    <h2>用户组</h2>
+    <select class="easyui-combobox" name="state" style="width:80%">
+        <option value="AL">手机用户</option>
+        <option value="AK">管理端用户</option>
+        <option value="AZ">禁止用户</option>
+        <option value="AR">测试用户</option>
+    </select>
+</div>
+    <div style="width: 68%;height: 100%;border: 1px solid black;display: inline-block;float: right">
+        <form method="post" name="myform">
+            <table border="0" width="300">
+                <tr>
+                    <td width="40%">
+                        <select style="WIDTH:100%" multiple name="list1" size="12" ondblclick="moveOption(document.myform.list1, document.myform.list2)">
+                            <option value="北京">北京</option>
+                            <option value="上海">上海</option>
+                            <option value="山东">山东</option>
+                            <option value="安徽">安徽</option>
+                            <option value="重庆">重庆</option>
+                            <option value="福建">福建</option>
+                            <option value="甘肃">甘肃</option>
+                            <option value="广东">广东</option>
+                            <option value="广西">广西</option>
+                            <option value="贵州">贵州</option>
+                            <option value="海南">海南</option>
+                            <option value="河北">河北</option>
+                            <option value="黑龙江">黑龙江</option>
+                        </select>
+                    </td>
+                    <td width="20%" align="center">
+                        <input type="button" value="添加" onclick="moveOption(document.myform.list1, document.myform.list2)"><br/>
+                        <br/>
+                        <input type="button" value="删除" onclick="moveOption(document.myform.list2, document.myform.list1)">
+                    </td>
+                    <td width="40%">
+                        <select style="WIDTH:100%" multiple name="list2" size="12" ondblclick="moveOption(document.myform.list2, document.myform.list1)">
+                        </select>
+                    </td>
+                    <td>
+                        <button onclick="changepos(list2,-1)" type="button">上移</button>
+                        <br/>
+                        <button onclick="changepos(list2,1)" type="button">下移</button>
+                    </td>
+                </tr>
+            </table>
+            已获取的权限：<input type="text" name="city" size="40">
+        </form>
+    </div>
+</div>
+<div style="width: 60%;height: 58%;border: 1px solid black;position: absolute;right: 0;bottom: 0;background-color: #c4e3f3">
+    <table id="dg" class="easyui-datagrid"
+           title="Searching" iconCls="icon-search" toolbar="#tc"
+           rownumbers="true" >
+
+    </table>
+</div>
+<script language="JavaScript">
+
+    function moveOption(e1, e2){
+        try{
+            for(var i=0;i<e1.options.length;i++){
+                if(e1.options[i].selected){
+                    var e = e1.options[i];
+                    e2.options.add(new Option(e.text, e.value));
+                    e1.remove(i);
+                    ii=i-1
+                }
+            }
+            document.myform.city.value=getvalue(document.myform.list2);
+        }
+        catch(e){}
+    }
+    function getvalue(geto){
+        var allvalue = "";
+        for(var i=0;i<geto.options.length;i++){
+            allvalue +=geto.options[i].value + ",";
+        }
+        return allvalue;
+    }
+    function changepos(obj,index)
+    {
+        if(index==-1){
+            if (obj.selectedIndex>0){
+                obj.options(obj.selectedIndex).swapNode(obj.options(obj.selectedIndex-1))
+            }
+        }
+        else if(index==1){
+            if (obj.selectedIndex<obj.options.length-1){
+                obj.options(obj.selectedIndex).swapNode(obj.options(obj.selectedIndex+1))
+            }
+        }
+    }
+
+</script>
+</body>
+</html>
+
